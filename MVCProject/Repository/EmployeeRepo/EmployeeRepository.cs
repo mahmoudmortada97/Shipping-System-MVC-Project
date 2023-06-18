@@ -19,7 +19,7 @@ namespace MVCProject.Repository.EmployeeRepo
 
         public Employee GetById(int id)
         {
-            return _context.Employees.FirstOrDefault(e => e.Id == id)!;
+            return _context.Employees.FirstOrDefault(e => e.Id == id && e.IsDeleted == true)!;
         }
 
         public void Add(Employee employee)
