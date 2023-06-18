@@ -157,12 +157,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div class="container">
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
-            </div>
-@*           <div id="content">
+          <div id="content">
                 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -374,6 +369,12 @@
 
                 </nav>
                 <!-- End of Topbar -->
+                <div class="container">
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
+                @*
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
