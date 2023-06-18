@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using MVCProject.Models;
 using MVCProject.Repository.EmployeeRepo;
+using MVCProject.Repository.RepresentativeRepo;
+using MVCProject.Repository.RepresentiveRepo;
 
 namespace MVCProject
 {
@@ -14,6 +16,7 @@ namespace MVCProject
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddScoped<IRepresentativeRepository, RepresentativeRepository>();
             builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(
                         builder.Configuration.GetConnectionString("CS")));
 
