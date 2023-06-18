@@ -13,7 +13,7 @@ namespace MVCProject.Repository.EmployeeRepo
 
         public List<Employee> GetAll()
         {
-            return _context.Employees.ToList();
+            return _context.Employees.Where(e=>e.IsDeleted == false).ToList();
         }
 
 
@@ -35,7 +35,7 @@ namespace MVCProject.Repository.EmployeeRepo
         public void Delete(int id)
         {
             Employee employee = _context.Employees.Find(id)!;
-            _context.Remove(employee);
+            employee.IsDeleted = true;
         }
 
         public void Save()
