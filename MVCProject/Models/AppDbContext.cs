@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MVCProject.Models;
 
 namespace MVCProject.Models
 {
@@ -15,5 +16,7 @@ namespace MVCProject.Models
         {
 
         }
+
+        public DbSet<MVCProject.Models.Trader> Trader { get; set; } = default!;
     }
 }

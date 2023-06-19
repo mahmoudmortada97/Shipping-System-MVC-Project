@@ -22,7 +22,7 @@ namespace MVCProject.Models
 
         public bool IsDeleted { get; set; } = false;
 
-        [RegularExpression(@"^01[0125][0-9]{8}$", ErrorMessage = "The Phone number field is not a valid")]
+        [RegularExpression(@"^01[0125][0-9]{8}$", ErrorMessage = "Please Enter Valid Phone Number")]
         public string Phone { get; set; }
 
         [MinLength(5)]

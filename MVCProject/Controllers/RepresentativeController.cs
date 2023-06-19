@@ -10,7 +10,7 @@ namespace MVCProject.Controllers
     {
         IRepresentativeRepository _representativeRepostiory;
         public RepresentativeController(IRepresentativeRepository representativeRepository)
-        { 
+        {
             _representativeRepostiory = representativeRepository;
         }
         public IActionResult Index(string word)
@@ -27,12 +27,12 @@ namespace MVCProject.Controllers
             }
             return View(reps);
         }
-        public IActionResult Details(int id) 
-        { 
+        public IActionResult Details(int id)
+        {
             var rep = _representativeRepostiory.GetById(id);
-            return View(rep);   
+            return View(rep);
         }
-        public IActionResult Create() 
+        public IActionResult Create()
         {
             var repViewModel = new RepresentativeGovBranchPercentageViewModel
             {
@@ -44,7 +44,7 @@ namespace MVCProject.Controllers
         }
         [HttpPost]
         public IActionResult Create(RepresentativeGovBranchPercentageViewModel repViewModel)
-        {        
+        {
             if (!ModelState.IsValid)
             {
                 //repViewModel.overnorates = from context
@@ -79,11 +79,11 @@ namespace MVCProject.Controllers
                 Email = rep.Email,
                 Password = rep.Password,
                 Phone = rep.Phone,
-                BranchId= rep.BranchId,
+                BranchId = rep.BranchId,
                 DiscountTypeId = rep.DiscountTypeId,
-                GovernorateId= rep.GovernorateId,
-                IsDeleted= rep.IsDeleted,
-                CompanyPercentageOfOrder= rep.CompanyPercentageOfOrder,
+                GovernorateId = rep.GovernorateId,
+                IsDeleted = rep.IsDeleted,
+                CompanyPercentageOfOrder = rep.CompanyPercentageOfOrder,
 
                 //Governorates = from context
                 //Branchs = from context
@@ -91,7 +91,7 @@ namespace MVCProject.Controllers
             };
             return View(repViewModel);
         }
-        [HttpPost]
+        //[HttpPost]
         //public IActionResult Create(RepresentativeGovBranchPercentageViewModel repViewModel)
         //{
         //    if (!ModelState.IsValid)
@@ -117,5 +117,5 @@ namespace MVCProject.Controllers
         //    _representativeRepostiory.Save();
         //    return RedirectToAction(nameof(Index));
         //}
-    }
+    } 
 }

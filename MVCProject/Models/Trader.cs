@@ -2,12 +2,12 @@
 
 namespace MVCProject.Models
 {
-    public class Employee
+    public class Trader
     {
-
         public int Id { get; set; }
+
         [MaxLength(50)]
-        [MinLength(8, ErrorMessage = "FullName must be more than 8 char")]
+        [MinLength(3, ErrorMessage = "Name must be more than 3 char")]
         public string Name { get; set; }
 
         [DataType(DataType.EmailAddress)]
@@ -18,14 +18,20 @@ namespace MVCProject.Models
         ErrorMessage = "Password must be 8-16 characters long</br> with at least one numeric character")]
         public string Password { get; set; }
 
+        [Required]
+        public bool IsDeleted { get; set; }
+
         [RegularExpression(@"^01[0125][0-9]{8}$", ErrorMessage = "Please Enter Valid Phone Number")]
         public string Phone { get; set; }
-        
         public string Address { get; set; }
 
-        public DateTime creationDate { get; set; } = DateTime.Now;
+        public string StoreName { get; set; } // we will add governement and city --> Mostafa   
 
-        [Required]
-        public bool IsDeleted { get; set; } = false;
+        public int SpecialPickupCost { get; set; }
+
+        public int TraderTaxForRejectedOrders { get; set; }
+
+
+
     }
 }
