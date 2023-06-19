@@ -7,6 +7,7 @@ namespace MVCProject.Models
     {
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Representative> Representatives { get; set; }
+        public DbSet<Branch> Branches { get; set; }
         public AppDbContext() : base()
         {
 

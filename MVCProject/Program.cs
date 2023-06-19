@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MVCProject.Models;
+using MVCProject.Repository.BranchRepo;
 using MVCProject.Repository.EmployeeRepo;
 using MVCProject.Repository.RepresentativeRepo;
 using MVCProject.Repository.RepresentiveRepo;
@@ -19,6 +20,7 @@ namespace MVCProject
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddScoped<IRepresentativeRepository, RepresentativeRepository>();
             builder.Services.AddScoped<ITraderRepository, TraderRepository>();
+            builder.Services.AddScoped<IBranchRepository,BranchRepository>();
             builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(
                         builder.Configuration.GetConnectionString("CS")));
 
