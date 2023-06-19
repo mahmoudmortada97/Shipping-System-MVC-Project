@@ -4,5 +4,6 @@
 
     public class Governorate
     {
+        public int Id { get; set; }
     }
 }

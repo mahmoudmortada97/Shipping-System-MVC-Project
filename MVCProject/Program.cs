@@ -3,6 +3,7 @@ using MVCProject.Models;
 using MVCProject.Repository.EmployeeRepo;
 using MVCProject.Repository.RepresentativeRepo;
 using MVCProject.Repository.RepresentiveRepo;
+using MVCProject.Repository.TraderRepo;
 
 namespace MVCProject
 {
@@ -17,6 +18,7 @@ namespace MVCProject
 
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddScoped<IRepresentativeRepository, RepresentativeRepository>();
+            builder.Services.AddScoped<ITraderRepository, TraderRepository>();
             builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(
                         builder.Configuration.GetConnectionString("CS")));
 
