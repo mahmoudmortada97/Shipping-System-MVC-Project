@@ -21,8 +21,8 @@ namespace MVCProject.Models
         [Required]
         public bool IsDeleted { get; set; }
 
-        [RegularExpression(@"^01[0125][0-9]{8}$", ErrorMessage = "The PhoneNumber field is not a valid phone number")]
-        public int Phone { get; set; }
+        [RegularExpression(@"^01[0125][0-9]{8}$", ErrorMessage = "Please Enter Valid Phone Number")]
+        public string Phone { get; set; }
         public string Address { get; set; }
 
         public string StoreName { get; set; } // we will add governement and city --> Mostafa   

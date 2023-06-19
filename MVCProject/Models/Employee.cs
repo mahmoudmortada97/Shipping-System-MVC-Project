@@ -6,7 +6,6 @@ namespace MVCProject.Models
     {
 
         public int Id { get; set; }
-
         [MaxLength(50)]
         [MinLength(8, ErrorMessage = "FullName must be more than 8 char")]
         public string Name { get; set; }
@@ -19,7 +18,7 @@ namespace MVCProject.Models
         ErrorMessage = "Password must be 8-16 characters long</br> with at least one numeric character")]
         public string Password { get; set; }
 
-        [RegularExpression(@"^01[0125][0-9]{8}$", ErrorMessage = "The PhoneNumber field is not a valid phone number")]
+        [RegularExpression(@"^01[0125][0-9]{8}$", ErrorMessage = "Please Enter Valid Phone Number")]
         public string Phone { get; set; }
         
         public string Address { get; set; }
