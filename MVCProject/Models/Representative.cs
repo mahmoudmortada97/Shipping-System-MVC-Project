@@ -40,7 +40,7 @@ namespace MVCProject.Models
         public virtual Branch? Branch { get; set; }
 
         [ForeignKey("DiscountType")]
-        public int DiscountTypeId { get; set; } 
+        public int? DiscountTypeId { get; set; } 
         public DiscountType? DiscountType { get; set; }
 
     }
