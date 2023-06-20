@@ -44,10 +44,4 @@ namespace MVCProject.Models
         public DiscountType? DiscountType { get; set; }
 
     }
-
-    public class DiscountType
-    {
-        public int Id { get; set; }
-        public decimal Percentage { get; set; }
-    }
 }

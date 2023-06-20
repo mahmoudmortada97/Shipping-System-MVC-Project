@@ -7,9 +7,6 @@ namespace MVCProject.Models
         public int id { get; set; }
 
         // Government 
-
-        // City
-
         public int Shippingprice { get; set; }
 
         public bool IsDeleted { get; set; }
@@ -18,6 +15,12 @@ namespace MVCProject.Models
         public int TraderId { get; set; }
 
         public Trader trader { get; set; }
+
+
+        //City prop created by salah && rizk
+        [ForeignKey ("City")]
+        public int CityId { get; set; }
+        public virtual City? City { get; set; }
 
     }
 }

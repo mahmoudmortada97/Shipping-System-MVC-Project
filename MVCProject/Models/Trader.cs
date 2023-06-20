@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVCProject.Models
 {
@@ -6,7 +7,7 @@ namespace MVCProject.Models
     {
         public int Id { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(50, ErrorMessage = "ame must be less than 50 char")] //add err mess by salah && rizk
         [MinLength(3, ErrorMessage = "Name must be more than 3 char")]
         public string Name { get; set; }
 
@@ -30,6 +31,20 @@ namespace MVCProject.Models
         public int SpecialPickupCost { get; set; }
 
         public int TraderTaxForRejectedOrders { get; set; }
+
+        //City and govern,branch prop created by salah && rizk 
+
+        [ForeignKey("Governorate")]
+        public int GoverId { get; set; }
+        public virtual Governorate? Governorate { get; set; }
+
+        [ForeignKey("City")]
+        public int CityId { get; set; }
+        public virtual City? City { get; set; }
+
+        [ForeignKey("Branch")]
+        public int BranchId { get; set; }
+        public virtual Branch? Branch { get; set; }
 
 
 

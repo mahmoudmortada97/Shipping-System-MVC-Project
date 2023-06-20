@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Good night ya rgalla\" />
+    <Folder Include="Repository\Governorate\" />
   </ItemGroup>
 
 </Project>

@@ -36,9 +36,11 @@ namespace MVCProject.Controllers
         {
             var repViewModel = new RepresentativeGovBranchPercentageViewModel
             {
-                //Governorates = from context
+                //Governorates = from context          
                 //Branchs = from context
                 //DiscountTypes = from context
+                
+                
             };
             return View();
         }
@@ -47,7 +49,7 @@ namespace MVCProject.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //repViewModel.overnorates = from context
+                //repViewModel.Governorates = from context
                 //repViewModel.Branchs = from context
                 //repViewModel.DiscountTypes = from context
                 return View(repViewModel);

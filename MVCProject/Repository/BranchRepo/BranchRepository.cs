@@ -2,7 +2,7 @@
 
 namespace MVCProject.Repository.BranchRepo
 {
-    public class BranchRepository
+    public class BranchRepository:IBranchRepository
     {
         AppDbContext _context;
 
