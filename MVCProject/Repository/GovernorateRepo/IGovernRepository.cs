@@ -4,10 +4,10 @@ namespace MVCProject.Repository.GovernorateRepo
 {
     public interface IGovernRepository     /* add by salah && Rizk*/
     {
-        List<Governorate> GetAll();
-        Governorate GetById(int id);
-        void Add(Governorate governorate);
-        void Edit(Governorate governorate);
+        List<Government> GetAll();
+        Government GetById(int id);
+        void Add(Government governmate);
+        void Edit(Government governmate);
         void Delete(int id);
         void Save();
     }

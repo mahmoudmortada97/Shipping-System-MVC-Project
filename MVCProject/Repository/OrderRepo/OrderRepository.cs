@@ -1,0 +1,124 @@
+﻿using Microsoft.EntityFrameworkCore;
+using MVCProject.Models;
+
+namespace MVCProject.Repository.OrderRepo
+{
+    public class OrderRepository:IOrderRepository
+    {
+        AppDbContext _context;
+
+        public OrderRepository(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public List<Order> GetAll()
+        {
+            return _context.Orders.Where(e => e.IsDeleted == false).ToList();
+        }
+
+
+        public Order GetById(int id)
+        {
+            return _context.Orders.FirstOrDefault(e => e.Id == id && e.IsDeleted == true)!;
+        }
+
+        public void Add(Order order)
+        {
+            _context.Orders.Add(order);
+        }
+
+        public void Edit(Order order)
+        {
+            _context.Orders.Entry(order).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+        }
+
+        public void Delete(int id)
+        {
+            Order order = _context.Orders.Find(id)!;
+            order.IsDeleted = true;
+        }
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
+
+        public decimal CalculateTotalPrice(int id)
+        {
+            Order order = _context.Orders.Include(o => o.Products)
+                                            .Include(o => o.ClientCity)
+                                            .Include(o => o.OrderType)
+                                            .Include(o=>o.Trader)
+                                                .ThenInclude(t=>t.SpecialPriceForCities)
+                                                .FirstOrDefault()!;
+
+            decimal price = 0;
+
+            //Special Price for Trader within Specific City 
+            //foreach (var item in order.Trader.SpecialPriceForCities)
+            //{
+            //    if(item.City == order.ClientCity)
+            //        {
+            //            price += item.Shippingprice;
+            //        break;
+            //        }   
+            //}
+
+            price += CalculateCityPrice(order.ClientCity);     //City Price
+
+            price += CalculateOrderTypePrice(order.OrderType);  //Order Type Price
+
+            price += CalculatePriceIfShippingToVillage(order);  //Shipping To Village Price
+
+            price += CalculatePriceOfOrderTotalWeigth(GetOrderWeight(order)); //Total Size Weight
+
+            return price;
+        }
+
+        public decimal CalculateCityPrice(City city)
+        {
+            var cityPrice = city.ShippingCost;
+            return cityPrice;
+        }
+
+        public decimal CalculateOrderTypePrice(OrderType orderType)
+        {
+            var orderPrice = orderType.Price;
+            return orderPrice;
+        }
+
+        public decimal CalculatePriceIfShippingToVillage(Order order)
+        {
+            decimal shippingToVillagePrice;
+
+            if (order.DeliverToVillage == true)
+            {
+                shippingToVillagePrice = 30;
+            }
+            else
+            {
+                shippingToVillagePrice = 0;
+            }
+            return shippingToVillagePrice;
+        }
+
+        public decimal GetOrderWeight(Order order)
+        {
+            decimal totalOrderWeigth = 0;
+            foreach (var product in order.Products)
+            {
+                totalOrderWeigth += product.Weight * product.Quantity;
+            }
+            return totalOrderWeigth;
+        }
+        public decimal CalculatePriceOfOrderTotalWeigth(decimal totalWeight)
+        {
+            if (totalWeight > _context.WeightSetting.Select(ws => ws.DefaultSize).FirstOrDefault())
+            {
+                return (totalWeight - _context.WeightSetting.Select(ws => ws.DefaultSize).FirstOrDefault())
+                    * _context.WeightSetting.Select(ws => ws.PriceForEachExtraKilo).FirstOrDefault();
+            }
+            return _context.WeightSetting.Select(ws => ws.DefaultSize).FirstOrDefault();
+        }
+    }
+}

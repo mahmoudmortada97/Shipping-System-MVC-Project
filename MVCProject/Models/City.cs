@@ -14,9 +14,15 @@ namespace MVCProject.Models
         public decimal ShippingCost { get; set; }
         [ForeignKey ("Governorate") ]
         public int GoverId { get; set; }
+<<<<<<< HEAD
         public virtual Governorate? Governorate { get; set; }
         public List<Trader> Traders { get; set; }
 
+=======
+        public virtual Government? Governorate { get; set; }
+
+        public List<Trader> Traders { get; set; }
+>>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
 
 
 

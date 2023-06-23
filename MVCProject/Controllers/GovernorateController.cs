@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVCProject.Models;
+using MVCProject.Repository.CityRepo;
 using MVCProject.Repository.GovernorateRepo;
 using MVCProject.ViewModel;
 
@@ -8,14 +9,16 @@ namespace MVCProject.Controllers
     public class GovernorateController : Controller
     {
         IGovernRepository _governRepository;
-        public GovernorateController(IGovernRepository governRepository)
+        ICityRepository _cityRepository;
+        public GovernorateController(IGovernRepository governRepository,ICityRepository cityRepository)
         {
             _governRepository = governRepository;
-            
+            _cityRepository = cityRepository;
+
         }
         public IActionResult Index(string word)
         {
-            List<Governorate> governorates;
+            List<Government> governorates;
             if (string.IsNullOrEmpty(word))
             {
                 governorates = _governRepository.GetAll();
@@ -29,7 +32,7 @@ namespace MVCProject.Controllers
         }
         public IActionResult Details(int id)
         {
-            var gov = _governRepository.GetById(id);
+            var gov = _cityRepository.GetAllCitiesByGovId(id);
             return View(gov);
         }
         public IActionResult Create()
@@ -38,7 +41,7 @@ namespace MVCProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Governorate governorate)
+        public IActionResult Create(Government governorate)
         {
             if (ModelState.IsValid)
             {
@@ -50,11 +53,11 @@ namespace MVCProject.Controllers
         }
         public IActionResult Edit(int id)
         {
-            Governorate governorate = _governRepository.GetById(id);
+            Government governorate = _governRepository.GetById(id);
             return View(governorate);
         }
         [HttpPost]
-        public IActionResult Edit(Governorate governorate)
+        public IActionResult Edit(Government governorate)
         {
             if (ModelState.IsValid)
             {

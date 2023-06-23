@@ -1,10 +1,11 @@
-﻿@model Governorate
+﻿@model Government
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Edit</h1>
-<form method="post" asp-action="Edit">
+<h1>Create</h1>
+
+<form method="post" asp-action="Create">
     @Html.AntiForgeryToken()
     <input class="form-control" asp-for="Id" hidden="" />
     <div>
@@ -12,6 +13,5 @@
         <input class="form-control" asp-for="Name" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-    <input type="submit" value="Edit" class="btn btn-primary" />
+    <input type="submit" value="Create" class="btn btn-primary" />
 </form>
-
