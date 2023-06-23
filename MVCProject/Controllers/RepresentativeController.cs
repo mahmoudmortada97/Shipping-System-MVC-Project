@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVCProject.Models;
+using MVCProject.Repository.BranchRepo;
+using MVCProject.Repository.CityRepo;
+using MVCProject.Repository.DiscountTypeRepo;
 using MVCProject.Repository.EmployeeRepo;
+using MVCProject.Repository.GovernorateRepo;
 using MVCProject.Repository.RepresentiveRepo;
 using MVCProject.ViewModel;
 
@@ -9,9 +13,16 @@ namespace MVCProject.Controllers
     public class RepresentativeController : Controller
     {
         IRepresentativeRepository _representativeRepostiory;
-        public RepresentativeController(IRepresentativeRepository representativeRepository)
+        IGovernRepository _governRepository;
+        IDiscountTypeRepository _discountTypeRepository;
+        IBranchRepository _branchRepository;
+
+        public RepresentativeController(IRepresentativeRepository representativeRepository, IGovernRepository governRepository, IDiscountTypeRepository discountTypeRepository, IBranchRepository branchRepository)
         {
             _representativeRepostiory = representativeRepository;
+            _governRepository = governRepository;
+            _branchRepository = branchRepository;
+            _discountTypeRepository = discountTypeRepository;
         }
         public IActionResult Index(string word)
         {
@@ -36,11 +47,9 @@ namespace MVCProject.Controllers
         {
             var repViewModel = new RepresentativeGovBranchPercentageViewModel
             {
-                //Governorates = from context          
-                //Branchs = from context
-                //DiscountTypes = from context
-                
-                
+                Governorates = _governRepository.GetAll(),
+                Branchs = _branchRepository.GetAll(),
+                DiscountTypes = _discountTypeRepository.GetAll()
             };
             return View();
         }
@@ -49,9 +58,9 @@ namespace MVCProject.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //repViewModel.Governorates = from context
-                //repViewModel.Branchs = from context
-                //repViewModel.DiscountTypes = from context
+                repViewModel.Governorates = _governRepository.GetAll();
+                repViewModel.Branchs = _branchRepository.GetAll();
+                repViewModel.DiscountTypes = _discountTypeRepository.GetAll();
                 return View(repViewModel);
             }
             var rep = new Representative
@@ -86,38 +95,46 @@ namespace MVCProject.Controllers
                 GovernorateId = rep.GovernorateId,
                 IsDeleted = rep.IsDeleted,
                 CompanyPercentageOfOrder = rep.CompanyPercentageOfOrder,
-
-                //Governorates = from context
-                //Branchs = from context
-                //DiscountTypes = from context
+                Governorates = _governRepository.GetAll(),
+                Branchs = _branchRepository.GetAll(),
+                DiscountTypes = _discountTypeRepository.GetAll()
             };
             return View(repViewModel);
         }
-        //[HttpPost]
-        //public IActionResult Create(RepresentativeGovBranchPercentageViewModel repViewModel)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        //repViewModel.overnorates = from context
-        //        //repViewModel.Branchs = from context
-        //        //repViewModel.DiscountTypes = from context
-        //        return View(repViewModel);
-        //    }
-        //    var rep = new Representative
-        //    {
-        //        Name = repViewModel.Name,
-        //        Address = repViewModel.Address,
-        //        Email = repViewModel.Email,
-        //        Password = repViewModel.Password,
-        //        Phone = repViewModel.Phone,
-        //        CompanyPercentageOfOrder = repViewModel.CompanyPercentageOfOrder,
-        //        GovernorateId = repViewModel.GovernorateId,
-        //        BranchId = repViewModel.BranchId,
-        //        DiscountTypeId = repViewModel.DiscountTypeId,
-        //    };
-        //    _representativeRepostiory.Add(rep);
-        //    _representativeRepostiory.Save();
-        //    return RedirectToAction(nameof(Index));
-        //}
-    } 
+        [HttpPost]
+        public IActionResult Edit(RepresentativeGovBranchPercentageViewModel repViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                repViewModel.Governorates = _governRepository.GetAll();
+                repViewModel.Branchs = _branchRepository.GetAll();
+                repViewModel.DiscountTypes = _discountTypeRepository.GetAll();
+                return View(repViewModel);
+            }
+            var rep = new Representative
+            {
+                Name = repViewModel.Name,
+                Address = repViewModel.Address,
+                Email = repViewModel.Email,
+                Password = repViewModel.Password,
+                Phone = repViewModel.Phone,
+                CompanyPercentageOfOrder = repViewModel.CompanyPercentageOfOrder,
+                GovernorateId = repViewModel.GovernorateId,
+                BranchId = repViewModel.BranchId,
+                DiscountTypeId = repViewModel.DiscountTypeId,
+            };
+            _representativeRepostiory.Add(rep);
+            _representativeRepostiory.Save();
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Delete(int id)
+        {
+            _representativeRepostiory.Delete(id);
+            _representativeRepostiory.Save();
+            return View();
+        }
+
+
+
+    }
 }
