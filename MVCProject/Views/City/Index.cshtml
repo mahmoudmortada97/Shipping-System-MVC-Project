@@ -1,37 +1,28 @@
-﻿@model List<Government>
+﻿@model List<City>
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
-
-<a asp-action="Create" class="btn btn-primary mb-3">Create</a>
-
 <table class="table table-bordered table-hover">
     <tr>
         <th>ID</th>
-        <th>Name </th>  
+        <th>Name </th>
+        <th>Shipping Cost</th>
         <th></th>
         <th></th>
-        <th></th>
-        <th></th>
-
     </tr>
     @foreach (var item in Model)
     {
         <tr id="row_@item.Id">
             <td>@item.Id </td>
             <td>@item.Name</td>
-            <td><a href="/Governorate/Edit/@item.Id">Edit</a></td>
+            <td>@item.ShippingCost</td>
+            <td><a href="/City/Edit/@item.Id">Edit</a></td>
             <td>
                 <input type="submit" style="background-color:red;color:white" value="Delete" onclick="Delete(@item.Id)" />
             </td>
-            <td>
-                <a asp-action="Create" asp-controller="City" asp-route-id="@item.Id" class="btn btn-success">Add New City</a>
-            </td>
-            <td>
-                <a asp-action="Details" asp-controller="Governorate" asp-route-id="@item.Id" class="btn btn-success">Details</a>
-            </td>
+           
         </tr>
     }
 </table>
