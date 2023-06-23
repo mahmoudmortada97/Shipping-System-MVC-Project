@@ -23,6 +23,11 @@ namespace MVCProject.Repository.CityRepo
 
         }
 
+        public List<City> GetAllCitiesByGovId(int id)
+        {
+            return _context.Cities.Where(c => c.GoverId == id).ToList();
+        }
+
         public void Edit(City city)
         {
             _context.Entry(city).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
@@ -42,6 +47,7 @@ namespace MVCProject.Repository.CityRepo
         {
             _context.SaveChanges();
         }
+        
     }
 
 }

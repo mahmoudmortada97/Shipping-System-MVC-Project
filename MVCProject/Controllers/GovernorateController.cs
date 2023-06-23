@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVCProject.Models;
+using MVCProject.Repository.CityRepo;
 using MVCProject.Repository.GovernorateRepo;
 using MVCProject.ViewModel;
 
@@ -8,10 +9,12 @@ namespace MVCProject.Controllers
     public class GovernorateController : Controller
     {
         IGovernRepository _governRepository;
-        public GovernorateController(IGovernRepository governRepository)
+        ICityRepository _cityRepository;
+        public GovernorateController(IGovernRepository governRepository,ICityRepository cityRepository)
         {
             _governRepository = governRepository;
-            
+            _cityRepository = cityRepository;
+
         }
         public IActionResult Index(string word)
         {
@@ -29,7 +32,7 @@ namespace MVCProject.Controllers
         }
         public IActionResult Details(int id)
         {
-            var gov = _governRepository.GetById(id);
+            var gov = _cityRepository.GetAllCitiesByGovId(id);
             return View(gov);
         }
         public IActionResult Create()
