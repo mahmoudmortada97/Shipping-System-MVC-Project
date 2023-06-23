@@ -18,16 +18,8 @@ namespace MVCProject.Controllers
         }
         public IActionResult Index(string word)
         {
-            List<City> cities;
-            if (string.IsNullOrEmpty(word))
-            {
-                cities= _cityRepository.GetAll();
-            }
-            else
-            {
-                cities = _cityRepository.GetAll().Where(
-                                e => e.Name.ToLower().Contains(word.ToLower())).ToList();
-            }
+            List<City> cities;          
+            cities= _cityRepository.GetAll();            
             return View(cities);
         }
         public IActionResult Details(int id)
@@ -35,9 +27,10 @@ namespace MVCProject.Controllers
             var city = _cityRepository.GetById(id);
             return View(city);
         }
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            ViewData["GovList"] = _governRepository.GetAll();   
+            ViewData["GovList"] = _governRepository.GetAll();
+            //ViewData["gov_id"] = _governRepository.GetById(id);
             return View();
         }
 
@@ -76,7 +69,7 @@ namespace MVCProject.Controllers
         {
             _cityRepository.Delete(id);
             _cityRepository.Save();
-            return View();
+            return Content("sucsses");
         }
     }
 }
