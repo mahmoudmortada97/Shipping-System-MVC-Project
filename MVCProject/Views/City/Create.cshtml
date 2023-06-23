@@ -9,7 +9,7 @@
 <form method="post" asp-action="Create">
     @Html.AntiForgeryToken()
     <input class="form-control" asp-for="Id" hidden="" />
-     <input class="form-control" name="GoverId" value="@ViewBag.gov_id" hidden="" />  @* need to discussion*@
+    <input class="form-control" name="GoverId" value="@ViewBag.gov_id" hidden="" />  @* need to discussion*@
     <div>
         <label asp-for="Name"></label>
         <input class="form-control" asp-for="Name" />
