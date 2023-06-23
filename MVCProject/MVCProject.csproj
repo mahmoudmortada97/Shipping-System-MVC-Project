@@ -26,4 +26,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.7" />
   </ItemGroup>
 
+<<<<<<< HEAD
+=======
+  <ItemGroup>
+    <Folder Include="Good night ya rgalla\" />
+  </ItemGroup>
+
+>>>>>>> a4ce7df4f7abb005c6f9c34fa795cd73faea9346
 </Project>
