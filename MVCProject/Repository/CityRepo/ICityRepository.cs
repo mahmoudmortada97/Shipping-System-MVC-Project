@@ -5,7 +5,7 @@ namespace MVCProject.Repository.CityRepo
     public interface ICityRepository    /* add by salah && Rizk*/
     {
         List<City> GetAll();
-        //List<City> GetAllCitiesByGovId(int id);
+        List<City> GetAllCitiesByGovId(int id);
         City GetById(int id);
         void Add(City city);
         void Edit(City city);
