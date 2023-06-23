@@ -13,7 +13,6 @@ namespace MVCProject.Models
 
         public DateTime CreationDate { get; set; } = DateTime.Now;
 
-
         public bool IsDeleted { get; set; } = false;
     }
 }
