@@ -1,0 +1,48 @@
+﻿@model MVCProject.ViewModel.AccountViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>View</h1>
+
+<h4>AccountViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="LoginAsEmployee" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LoginType" class="control-label"></label>
+                <select asp-for="LoginType" class="form-control">
+                    <option>Employee</option>
+                    <option>Trader</option>
+                    <option>Representative</option>
+                </select>
+                <span asp-validation-for="LoginType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

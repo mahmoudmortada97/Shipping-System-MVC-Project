@@ -27,6 +27,5 @@ namespace MVCProject.Models
         [Required]
         public bool IsDeleted { get; set; } = false;
 
-        public string Role { get; set; }
     }
 }
