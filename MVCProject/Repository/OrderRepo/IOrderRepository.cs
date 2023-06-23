@@ -11,5 +11,16 @@ namespace MVCProject.Repository.OrderRepo
         void Delete(int id);
         void Save();
         decimal CalculateTotalPrice(int id);
+
+        decimal CalculateCityPrice(City city);
+
+        decimal CalculateOrderTypePrice(OrderType orderType);
+
+        decimal CalculatePriceIfShippingToVillage(Order order);
+
+        decimal GetOrderWeight(Order order);
+
+        decimal CalculatePriceOfOrderTotalWeigth(decimal totalWeight);
+
     }
 }
