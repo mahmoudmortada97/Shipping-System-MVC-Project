@@ -4,17 +4,16 @@ namespace MVCProject.Models
 {
     public class TraderSpecialPriceForCities
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
         // Government 
         public int Shippingprice { get; set; }
 
         public bool IsDeleted { get; set; }
 
-        [ForeignKey("trader")]
+        [ForeignKey("Trader")]
         public int TraderId { get; set; }
-
-        public Trader trader { get; set; }
+        public Trader Trader { get; set; }
 
 
         //City prop created by salah && rizk

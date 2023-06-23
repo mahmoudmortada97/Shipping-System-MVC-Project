@@ -7,7 +7,6 @@ namespace MVCProject.Models
     {
         public int Id { get; set; }
 
-
         public string StoreName { get; set; } // we will add governement and city --> Mostafa   
 
         public int SpecialPickupCost { get; set; }
@@ -16,9 +15,9 @@ namespace MVCProject.Models
 
         //City and govern,branch prop created by salah && rizk 
 
-        [ForeignKey("Governorate")]
+        [ForeignKey("Government")]
         public int GoverId { get; set; }
-        public virtual Governorate? Governorate { get; set; }
+        public virtual Government? Governorate { get; set; }
 
         [ForeignKey("City")]
         public int CityId { get; set; }
@@ -29,6 +28,7 @@ namespace MVCProject.Models
         public virtual Branch? Branch { get; set; }
 
 
-
+       public List<TraderSpecialPriceForCities>? SpecialPriceForCities { get; set; } =
+                            new List<TraderSpecialPriceForCities>();
     }
 }

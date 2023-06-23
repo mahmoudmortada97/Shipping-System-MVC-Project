@@ -7,17 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Good night ya rgalla\**" />
+    <Compile Remove="Repository\Governorate\**" />
+    <Content Remove="Good night ya rgalla\**" />
+    <Content Remove="Repository\Governorate\**" />
+    <EmbeddedResource Remove="Good night ya rgalla\**" />
+    <EmbeddedResource Remove="Repository\Governorate\**" />
+    <None Remove="Good night ya rgalla\**" />
+    <None Remove="Repository\Governorate\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.7" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Good night ya rgalla\" />
-    <Folder Include="Repository\Governorate\" />
   </ItemGroup>
 
 </Project>
