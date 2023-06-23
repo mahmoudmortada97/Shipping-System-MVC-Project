@@ -72,26 +72,7 @@ namespace MVCProject.Migrations
                     b.ToTable("Cities");
                 });
 
-<<<<<<< HEAD
-=======
-            modelBuilder.Entity("MVCProject.Models.DeliverType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DeliverTypes");
-                });
-
->>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
             modelBuilder.Entity("MVCProject.Models.DiscountType", b =>
                 {
                     b.Property<int>("Id")
@@ -152,11 +133,7 @@ namespace MVCProject.Migrations
                     b.ToTable("Employees");
                 });
 
-<<<<<<< HEAD
-            modelBuilder.Entity("MVCProject.Models.Governorate", b =>
-=======
             modelBuilder.Entity("MVCProject.Models.Government", b =>
->>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -174,8 +151,7 @@ namespace MVCProject.Migrations
                     b.ToTable("governorates");
                 });
 
-<<<<<<< HEAD
-=======
+
             modelBuilder.Entity("MVCProject.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -339,7 +315,6 @@ namespace MVCProject.Migrations
                     b.ToTable("Products");
                 });
 
->>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
             modelBuilder.Entity("MVCProject.Models.Representative", b =>
                 {
                     b.Property<int>("Id")
@@ -427,12 +402,9 @@ namespace MVCProject.Migrations
                     b.Property<int>("GoverId")
                         .HasColumnType("int");
 
-<<<<<<< HEAD
-=======
                     b.Property<int?>("GovernorateId")
                         .HasColumnType("int");
 
->>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -472,30 +444,28 @@ namespace MVCProject.Migrations
 
                     b.HasIndex("CityId");
 
-<<<<<<< HEAD
+
                     b.HasIndex("GoverId");
-=======
+
                     b.HasIndex("GovernorateId");
->>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
 
                     b.ToTable("Trader");
                 });
 
             modelBuilder.Entity("MVCProject.Models.TraderSpecialPriceForCities", b =>
                 {
-<<<<<<< HEAD
+
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-=======
+
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
->>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
 
                     b.Property<int>("CityId")
                         .HasColumnType("int");
@@ -509,19 +479,15 @@ namespace MVCProject.Migrations
                     b.Property<int>("TraderId")
                         .HasColumnType("int");
 
-<<<<<<< HEAD
+
                     b.HasKey("id");
-=======
                     b.HasKey("Id");
->>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
 
                     b.HasIndex("CityId");
 
                     b.HasIndex("TraderId");
 
-<<<<<<< HEAD
                     b.ToTable("traderSpecialPriceForCities");
-=======
                     b.ToTable("TraderSpecialPriceForCities");
                 });
 
@@ -542,18 +508,13 @@ namespace MVCProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WeightSetting");
->>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
                 });
 
             modelBuilder.Entity("MVCProject.Models.City", b =>
                 {
-<<<<<<< HEAD
-                    b.HasOne("MVCProject.Models.Governorate", "Governorate")
-                        .WithMany("City")
-=======
+
                     b.HasOne("MVCProject.Models.Government", "Governorate")
                         .WithMany("Cities")
->>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
                         .HasForeignKey("GoverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -561,8 +522,7 @@ namespace MVCProject.Migrations
                     b.Navigation("Governorate");
                 });
 
-<<<<<<< HEAD
-=======
+
             modelBuilder.Entity("MVCProject.Models.Order", b =>
                 {
                     b.HasOne("MVCProject.Models.Branch", "Branch")
@@ -641,7 +601,6 @@ namespace MVCProject.Migrations
                     b.Navigation("Order");
                 });
 
->>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
             modelBuilder.Entity("MVCProject.Models.Representative", b =>
                 {
                     b.HasOne("MVCProject.Models.Branch", "Branch")
@@ -654,11 +613,8 @@ namespace MVCProject.Migrations
                         .WithMany()
                         .HasForeignKey("DiscountTypeId");
 
-<<<<<<< HEAD
-                    b.HasOne("MVCProject.Models.Governorate", "Governorate")
-=======
+
                     b.HasOne("MVCProject.Models.Government", "Governorate")
->>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
                         .WithMany()
                         .HasForeignKey("GovernorateId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -674,11 +630,7 @@ namespace MVCProject.Migrations
             modelBuilder.Entity("MVCProject.Models.Trader", b =>
                 {
                     b.HasOne("MVCProject.Models.Branch", "Branch")
-<<<<<<< HEAD
                         .WithMany("Traders")
-=======
-                        .WithMany()
->>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
                         .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -689,17 +641,16 @@ namespace MVCProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-<<<<<<< HEAD
+
                     b.HasOne("MVCProject.Models.Governorate", "Governorate")
                         .WithMany("Traders")
                         .HasForeignKey("GoverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-=======
+
                     b.HasOne("MVCProject.Models.Government", "Governorate")
                         .WithMany("Traders")
                         .HasForeignKey("GovernorateId");
->>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
 
                     b.Navigation("Branch");
 
@@ -716,29 +667,26 @@ namespace MVCProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-<<<<<<< HEAD
-                    b.HasOne("MVCProject.Models.Trader", "trader")
-                        .WithMany()
-=======
+
+
                     b.HasOne("MVCProject.Models.Trader", "Trader")
                         .WithMany("SpecialPriceForCities")
->>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
                         .HasForeignKey("TraderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("City");
 
-<<<<<<< HEAD
+
                     b.Navigation("trader");
                 });
 
             modelBuilder.Entity("MVCProject.Models.Branch", b =>
                 {
                     b.Navigation("Traders");
-=======
+
                     b.Navigation("Trader");
->>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
+
                 });
 
             modelBuilder.Entity("MVCProject.Models.City", b =>
@@ -746,14 +694,13 @@ namespace MVCProject.Migrations
                     b.Navigation("Traders");
                 });
 
-<<<<<<< HEAD
             modelBuilder.Entity("MVCProject.Models.Governorate", b =>
                 {
                     b.Navigation("City");
 
                     b.Navigation("Traders");
                 });
-=======
+
             modelBuilder.Entity("MVCProject.Models.Government", b =>
                 {
                     b.Navigation("Cities");
@@ -772,7 +719,6 @@ namespace MVCProject.Migrations
 
                     b.Navigation("SpecialPriceForCities");
                 });
->>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
 #pragma warning restore 612, 618
         }
     }

@@ -11,29 +11,29 @@ namespace MVCProject.Repository.GovernorateRepo
 
         }
 
-        public void Add(Government government)
+        public void Add(Governorate government)
         {
             _context.governorates.Add(government);
         }
 
         public void Delete(int id)
         {
-            Government governorate = GetById(id);
+            Governorate governorate = GetById(id);
             _context.governorates.Remove(governorate);
 
         }
 
-        public void Edit(Government governorate)
+        public void Edit(Governorate governorate)
         {
             _context.Entry(governorate).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }
 
-        public List<Government> GetAll()
+        public List<Governorate> GetAll()
         {
             return _context.governorates.ToList();
         }
 
-        public Government GetById(int id)
+        public Governorate GetById(int id)
         {
             return _context.governorates.Find(id);
         }

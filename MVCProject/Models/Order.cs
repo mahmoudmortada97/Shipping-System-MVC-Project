@@ -17,7 +17,7 @@ namespace MVCProject.Models
 
         public string ClientEmailAddress { get; set; }
 
-        public Government ClientGovernorate { get; set; }
+        public Governorate ClientGovernorate { get; set; }
 
         public City ClientCity { get; set; }
 

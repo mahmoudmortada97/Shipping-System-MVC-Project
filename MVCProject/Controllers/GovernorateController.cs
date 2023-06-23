@@ -18,7 +18,7 @@ namespace MVCProject.Controllers
         }
         public IActionResult Index(string word)
         {
-            List<Government> governorates;
+            List<Governorate> governorates;
             if (string.IsNullOrEmpty(word))
             {
                 governorates = _governRepository.GetAll();
@@ -41,7 +41,7 @@ namespace MVCProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Government governorate)
+        public IActionResult Create(Governorate governorate)
         {
             if (ModelState.IsValid)
             {
@@ -53,11 +53,11 @@ namespace MVCProject.Controllers
         }
         public IActionResult Edit(int id)
         {
-            Government governorate = _governRepository.GetById(id);
+            Governorate governorate = _governRepository.GetById(id);
             return View(governorate);
         }
         [HttpPost]
-        public IActionResult Edit(Government governorate)
+        public IActionResult Edit(Governorate governorate)
         {
             if (ModelState.IsValid)
             {
