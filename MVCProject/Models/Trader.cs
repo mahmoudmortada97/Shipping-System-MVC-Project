@@ -7,7 +7,6 @@ namespace MVCProject.Models
     {
         public int Id { get; set; }
 
-
         public string StoreName { get; set; } // we will add governement and city --> Mostafa   
 
         public int SpecialPickupCost { get; set; }
@@ -27,8 +26,7 @@ namespace MVCProject.Models
         [ForeignKey("Branch")]
         public int BranchId { get; set; }
         public virtual Branch? Branch { get; set; }
-
-
+        public string Role { get; set; } = "Trader";
 
     }
 }

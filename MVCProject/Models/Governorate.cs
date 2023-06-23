@@ -12,6 +12,8 @@ namespace MVCProject.Models
         [MinLength(3, ErrorMessage = "Governorate name must be more than 5 char")]
         public string Name { get; set; }
         public List<City> City { get; set; }=new List<City>();
+        public List<Trader> Traders { get; set; }
+
 
     }
 }

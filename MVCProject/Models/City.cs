@@ -15,6 +15,8 @@ namespace MVCProject.Models
         [ForeignKey ("Governorate") ]
         public int GoverId { get; set; }
         public virtual Governorate? Governorate { get; set; }
+        public List<Trader> Traders { get; set; }
+
 
 
 

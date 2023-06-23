@@ -21,6 +21,8 @@ namespace MVCProject.Models
         [ForeignKey("DiscountType")]
         public int? DiscountTypeId { get; set; } 
         public DiscountType? DiscountType { get; set; }
+        public string Role { get; set; } = "Representative";
+
 
     }
 }
