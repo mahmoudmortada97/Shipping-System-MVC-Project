@@ -32,7 +32,6 @@ namespace MVCProject.Models
        public List<TraderSpecialPriceForCities>? SpecialPriceForCities { get; set; } =
                             new List<TraderSpecialPriceForCities>();
 
-
         public List<Order> Orders { get; set; } = new List<Order>();
     }
 }

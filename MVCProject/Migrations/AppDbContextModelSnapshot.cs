@@ -72,6 +72,22 @@ namespace MVCProject.Migrations
                     b.ToTable("Cities");
                 });
 
+            modelBuilder.Entity("MVCProject.Models.DeliverType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DeliverTypes");
+                });
 
             modelBuilder.Entity("MVCProject.Models.DiscountType", b =>
                 {
@@ -133,7 +149,7 @@ namespace MVCProject.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("MVCProject.Models.Government", b =>
+            modelBuilder.Entity("MVCProject.Models.Governorate", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -150,7 +166,6 @@ namespace MVCProject.Migrations
 
                     b.ToTable("governorates");
                 });
-
 
             modelBuilder.Entity("MVCProject.Models.Order", b =>
                 {
@@ -444,23 +459,13 @@ namespace MVCProject.Migrations
 
                     b.HasIndex("CityId");
 
-
-                    b.HasIndex("GoverId");
-
                     b.HasIndex("GovernorateId");
 
-                    b.ToTable("Trader");
+                    b.ToTable("Traders");
                 });
 
             modelBuilder.Entity("MVCProject.Models.TraderSpecialPriceForCities", b =>
                 {
-
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -479,15 +484,12 @@ namespace MVCProject.Migrations
                     b.Property<int>("TraderId")
                         .HasColumnType("int");
 
-
-                    b.HasKey("id");
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
 
                     b.HasIndex("TraderId");
 
-                    b.ToTable("traderSpecialPriceForCities");
                     b.ToTable("TraderSpecialPriceForCities");
                 });
 
@@ -512,8 +514,7 @@ namespace MVCProject.Migrations
 
             modelBuilder.Entity("MVCProject.Models.City", b =>
                 {
-
-                    b.HasOne("MVCProject.Models.Government", "Governorate")
+                    b.HasOne("MVCProject.Models.Governorate", "Governorate")
                         .WithMany("Cities")
                         .HasForeignKey("GoverId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -521,7 +522,6 @@ namespace MVCProject.Migrations
 
                     b.Navigation("Governorate");
                 });
-
 
             modelBuilder.Entity("MVCProject.Models.Order", b =>
                 {
@@ -537,7 +537,7 @@ namespace MVCProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MVCProject.Models.Government", "ClientGovernorate")
+                    b.HasOne("MVCProject.Models.Governorate", "ClientGovernorate")
                         .WithMany()
                         .HasForeignKey("ClientGovernorateId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -613,8 +613,7 @@ namespace MVCProject.Migrations
                         .WithMany()
                         .HasForeignKey("DiscountTypeId");
 
-
-                    b.HasOne("MVCProject.Models.Government", "Governorate")
+                    b.HasOne("MVCProject.Models.Governorate", "Governorate")
                         .WithMany()
                         .HasForeignKey("GovernorateId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -641,14 +640,7 @@ namespace MVCProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-
                     b.HasOne("MVCProject.Models.Governorate", "Governorate")
-                        .WithMany("Traders")
-                        .HasForeignKey("GoverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MVCProject.Models.Government", "Governorate")
                         .WithMany("Traders")
                         .HasForeignKey("GovernorateId");
 
@@ -667,8 +659,6 @@ namespace MVCProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-
-
                     b.HasOne("MVCProject.Models.Trader", "Trader")
                         .WithMany("SpecialPriceForCities")
                         .HasForeignKey("TraderId")
@@ -677,16 +667,12 @@ namespace MVCProject.Migrations
 
                     b.Navigation("City");
 
-
-                    b.Navigation("trader");
+                    b.Navigation("Trader");
                 });
 
             modelBuilder.Entity("MVCProject.Models.Branch", b =>
                 {
                     b.Navigation("Traders");
-
-                    b.Navigation("Trader");
-
                 });
 
             modelBuilder.Entity("MVCProject.Models.City", b =>
@@ -695,13 +681,6 @@ namespace MVCProject.Migrations
                 });
 
             modelBuilder.Entity("MVCProject.Models.Governorate", b =>
-                {
-                    b.Navigation("City");
-
-                    b.Navigation("Traders");
-                });
-
-            modelBuilder.Entity("MVCProject.Models.Government", b =>
                 {
                     b.Navigation("Cities");
 
