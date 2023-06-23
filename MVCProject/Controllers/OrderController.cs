@@ -12,7 +12,7 @@ namespace MVCProject.Controllers
         }
         public IActionResult Index()
         {
-            or
+            
             return View();
         }
     }
