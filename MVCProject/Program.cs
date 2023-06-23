@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using MVCProject.Models;
+using MVCProject.Repository.AccountRepo;
 using MVCProject.Repository.BranchRepo;
 using MVCProject.Repository.EmployeeRepo;
 using MVCProject.Repository.OrderRepo;
@@ -23,10 +25,16 @@ namespace MVCProject
             builder.Services.AddScoped<IRepresentativeRepository, RepresentativeRepository>();
             builder.Services.AddScoped<ITraderRepository, TraderRepository>();
             builder.Services.AddScoped<IBranchRepository,BranchRepository>();
+<<<<<<< HEAD
+            builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+=======
             builder.Services.AddScoped<IOrderRepository,OrderRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
+>>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
             builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(
                         builder.Configuration.GetConnectionString("CS")));
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+
 
             var app = builder.Build();
 
@@ -39,8 +47,8 @@ namespace MVCProject
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

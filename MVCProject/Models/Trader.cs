@@ -26,10 +26,14 @@ namespace MVCProject.Models
         [ForeignKey("Branch")]
         public int BranchId { get; set; }
         public virtual Branch? Branch { get; set; }
+<<<<<<< HEAD
+        public string Role { get; set; } = "Trader";
+=======
 
 
        public List<TraderSpecialPriceForCities>? SpecialPriceForCities { get; set; } =
                             new List<TraderSpecialPriceForCities>();
+>>>>>>> 80f5ff9cd2f16b6e638bf64c85b26b0858d82f00
 
         public List<Order> Orders { get; set; } = new List<Order>();
     }
