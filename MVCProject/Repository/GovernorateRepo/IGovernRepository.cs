@@ -6,8 +6,8 @@ namespace MVCProject.Repository.GovernorateRepo
     {
         List<Government> GetAll();
         Government GetById(int id);
-        void Add(Government governorate);
-        void Edit(Government governorate);
+        void Add(Government governmate);
+        void Edit(Government governmate);
         void Delete(int id);
         void Save();
     }

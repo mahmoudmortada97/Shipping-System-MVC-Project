@@ -2,7 +2,7 @@
 
 namespace MVCProject.Repository.OrderRepo
 {
-    public interface IOrderRepo
+    public interface IOrderRepository
     {
         List<Order> GetAll();
         Order GetById(int id);

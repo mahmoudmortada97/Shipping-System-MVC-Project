@@ -11,14 +11,14 @@ namespace MVCProject.Repository.GovernorateRepo
 
         }
 
-        public void Add(Government governorate)
+        public void Add(Government government)
         {
-            _context.governorates.Add(governorate);
+            _context.governorates.Add(government);
         }
 
         public void Delete(int id)
         {
-            Government governorate= GetById(id);
+            Government governorate = GetById(id);
             _context.governorates.Remove(governorate);
 
         }

@@ -3,11 +3,11 @@ using MVCProject.Models;
 
 namespace MVCProject.Repository.OrderRepo
 {
-    public class OrderRepo:IOrderRepo
+    public class OrderRepository:IOrderRepository
     {
         AppDbContext _context;
 
-        public OrderRepo(AppDbContext context)
+        public OrderRepository(AppDbContext context)
         {
             _context = context;
         }
@@ -67,16 +67,13 @@ namespace MVCProject.Repository.OrderRepo
             //        }   
             //}
 
-           
+            price += order.OrderType.Price;
+
 
             if (order.OrderType.Name != "Normal")
             {
                 price += order.ClientCity.ShippingCost;
 
-            }
-            else
-            {
-                price += order.OrderType.Price;
             }
 
 

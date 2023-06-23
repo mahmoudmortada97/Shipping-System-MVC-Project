@@ -6,7 +6,6 @@ namespace MVCProject.Models
 
     public class Government
     {
-        
         public int Id { get; set; }
         [MaxLength(20, ErrorMessage = "Governorate name must be less than 20 char")]
         [MinLength(3, ErrorMessage = "Governorate name must be more than 5 char")]
