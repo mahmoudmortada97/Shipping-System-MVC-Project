@@ -32,7 +32,7 @@ namespace MVCProject.Controllers
                     return RedirectToAction(nameof(LoginAsEmployee), 
                         new { email = acc.Email, password = acc.Password });
                 }
-                else if(acc.LoginType == LoginType.Employee.ToString())
+                else if(acc.LoginType == LoginType.Trader.ToString())
                 {
                     return RedirectToAction(nameof(LoginAsTrader),
                         new { email = acc.Email, password = acc.Password });
@@ -61,7 +61,7 @@ namespace MVCProject.Controllers
                 ClaimsPrincipal principal = new ClaimsPrincipal(claims);
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-                return RedirectToAction("Index", "Employee");
+                return RedirectToAction("Index", "Home");
 
         }
         public IActionResult LoginAsTrader(string email, string password)
@@ -80,7 +80,7 @@ namespace MVCProject.Controllers
                 ClaimsPrincipal principal = new ClaimsPrincipal(claims);
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-                return RedirectToAction("Index", "Trader");
+                return RedirectToAction("Index", "Home");
             
         }
         public IActionResult LoginAsRepresentative(string email, string password)
@@ -99,7 +99,7 @@ namespace MVCProject.Controllers
                 ClaimsPrincipal principal = new ClaimsPrincipal(claims);
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-                return RedirectToAction("Index", "Representative");
+                return RedirectToAction("Index", "Home");
 
           
         }

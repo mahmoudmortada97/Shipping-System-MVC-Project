@@ -10,14 +10,14 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="LoginAsEmployee" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="Login" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="LoginType" class="control-label"></label>
                 <select asp-for="LoginType" class="form-control">
-                    <option>Employee</option>
-                    <option>Trader</option>
-                    <option>Representative</option>
+                    <option value="Employee">Employee</option>
+                    <option value="Trader">Trader</option>
+                    <option value="Representative">Representative</option>
                 </select>
                 <span asp-validation-for="LoginType" class="text-danger"></span>
             </div>
