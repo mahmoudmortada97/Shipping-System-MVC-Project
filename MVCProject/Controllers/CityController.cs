@@ -30,16 +30,17 @@ namespace MVCProject.Controllers
         public IActionResult Create(int id)
         {
             ViewData["GovList"] = _governRepository.GetAll();
-            ViewData["gov_id"] = _governRepository.GetById(id);
+            ViewData["gov_id"] = _governRepository.GetById(id).Id;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(City city)
+        public IActionResult Create(City city,int id)
         {
+            var gov = _governRepository.GetById(id).Id;
             if (ModelState.IsValid)
             {
-
+                city.Id = default;
                 _cityRepository.Add(city);
                 _cityRepository.Save();
                 return RedirectToAction("Index");
