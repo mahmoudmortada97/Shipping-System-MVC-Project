@@ -362,7 +362,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-MVCProject/Migrations/20230623213947_v.Designer.cs
-*.cs
-MVCProject/Migrations/20230623213947_v.Designer.cs
-MVCProject/Migrations/20230623213947_v.cs
