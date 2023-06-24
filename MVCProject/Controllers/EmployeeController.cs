@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using MVCProject.Models;
 using MVCProject.Repository.EmployeeRepo;
 
@@ -21,7 +23,7 @@ namespace MVCProject.Controllers
             else
             {
                 employees = _employeeRepository.GetAll().Where(
-                                e=>e.Name.ToLower().Contains(word.ToLower())).ToList();
+                                e => e.Name.ToLower().Contains(word.ToLower())).ToList();
             }
             return View(employees);
 
@@ -34,21 +36,25 @@ namespace MVCProject.Controllers
             return View(employee);
         }
 
-        public IActionResult Add()
+        public IActionResult Create()
         {
+
             return View();
         }
 
         [HttpPost]
-        public IActionResult Add(Employee employee)
+        public IActionResult Create(Employee employee)
         {
+
             if (ModelState.IsValid)
             {
-                _employeeRepository.Add(employee);
+
+                _employeeRepository.Create(employee);
                 _employeeRepository.Save();
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Employee");
+
             }
-            
+
             return View(employee);
         }
 
@@ -64,16 +70,30 @@ namespace MVCProject.Controllers
             {
                 _employeeRepository.Edit(employee);
                 _employeeRepository.Save();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Employee");
             }
             return View(employee);
         }
 
         public IActionResult Delete(int id)
         {
-            _employeeRepository.Delete(id);
-            _employeeRepository.Save();
-            return View();
+            Employee employee = _employeeRepository.GetById(id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return View(employee);
         }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _employeeRepository.Delete(id);
+            return RedirectToAction("Index");
+        }
+
+
+
     }
 }
