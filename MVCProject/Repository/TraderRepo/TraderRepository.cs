@@ -1,14 +1,12 @@
 ﻿using MVCProject.Models;
 using MVCProject.Repository.TraderRepo;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
+
 
 namespace MVCProject.Repository.TraderRepo
 {
     public class TraderRepository : ITraderRepository
     {
         AppDbContext _context;
-
         public TraderRepository(AppDbContext context)
         {
             _context = context;
@@ -23,7 +21,6 @@ namespace MVCProject.Repository.TraderRepo
         {
 
             return _context.Traders.FirstOrDefault(e => e.Id == id && e.IsDeleted == false)!;//uncommented
-
         }
 
         public void Create(Trader trader) //changed from (Add --> Create) in all places 
@@ -38,8 +35,8 @@ namespace MVCProject.Repository.TraderRepo
 
         public void Delete(int id)
         {
-            Trader trader = _context.Traders.Find(id)!; //uncommented
-            trader.IsDeleted = true; //uncommented
+            Trader trader = _context.Traders.Find(id)!;
+            trader.IsDeleted = true;
         }
 
         public void Save()
