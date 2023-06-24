@@ -43,13 +43,13 @@ namespace MVCProject.ViewModel
         [Required(
             ErrorMessage = "Please choose governorate")]
         public int GovernorateId { get; set; }
-        public  List<Governorate> Governorates { get; set; } //for drop down list
+        public  List<Governorate>? Governorates { get; set; } //for drop down list
 
         [Required(
             ErrorMessage = "Please choose branch")]
         public int BranchId { get; set; }
-        public List<Branch> Branchs { get; set; } //for drop down list
-        public int? DiscountTypeId { get; set; }
-        public List<DiscountType> DiscountTypes { get; set; } //for drop down list
+        public List<Branch>? Branchs { get; set; } //for drop down list
+        public int DiscountTypeId { get; set; }
+        public List<DiscountType>? DiscountTypes { get; set; } //for drop down list
     }
 }
