@@ -37,7 +37,7 @@ namespace MVCProject.Controllers
         [HttpPost]
         public IActionResult Create(City city,int id)
         {
-            var gov= _governRepository.GetById(id).Id; 
+            var gov = _governRepository.GetById(id).Id;
             if (ModelState.IsValid)
             {
                 city.Id = default;

@@ -187,7 +187,7 @@ namespace MVCProject.Migrations
                         column: x => x.BranchId,
                         principalTable: "Branches",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Representatives_DiscountTypes_DiscountTypeId",
                         column: x => x.DiscountTypeId,
