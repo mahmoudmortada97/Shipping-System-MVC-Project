@@ -4,127 +4,69 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Traders</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-outline-primary my-2" asp-action="Create">Create New</a>
 </p>
-
-
-
 
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Employees</h6>
-    </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.StoreName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.SpecialPickupCost)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.TraderTaxForRejectedOrders)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.GoverId)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.City)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Branch)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Email)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Password)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Name)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Phone)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Address)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.creationDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.IsDeleted)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Role)
-                        </th>
-                        <th></th>
+                        <th>Store Name</th>
+                        <th>Special Pickup Cost</th>
+                        <th>Trader Tax For Rejected Orders</th>
+                        <th>Governorate Id</th>
+                        <th>City</th>
+                        <th>Branch</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Trader Name</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Creation Date</th>
+                        <th>Is Deleted</th>
+                        <th>Role</th>
+                        <th>Details</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.StoreName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SpecialPickupCost)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TraderTaxForRejectedOrders)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.GoverId)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.City.Id)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Branch.Id)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Email)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Password)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Phone)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Address)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.creationDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IsDeleted)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Role)
-                            </td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                            </td>
+                            <td>@item.StoreName</td>
+                            <td>@item.SpecialPickupCost</td>
+                            <td>@item.TraderTaxForRejectedOrders</td>
+                            <td>@item.GoverId</td>
+                            <td>@item?.City?.Id</td>
+                            <td>@item?.Branch?.Id</td>
+                            <td>@item?.Email</td>
+                            <td>@item?.Password</td>
+                            <td>@item?.Name</td>
+                            <td>@item?.Phone</td>
+                            <td>@item?.Address</td>
+                            <td>@item?.creationDate</td>
+                            <td>@item?.IsDeleted</td>
+                            <td>@item?.Role</td>
+                            <td><a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@item?.Id">Details</a></td>
+                            <td><a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item?.Id">Edit</a></td>
+                            <td><a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item?.Id">Delete</a></td>
                         </tr>
                     }
                 </tbody>
-
             </table>
         </div>
     </div>
 </div>
+
+
+
+
+

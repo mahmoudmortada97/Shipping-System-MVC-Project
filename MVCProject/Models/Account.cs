@@ -15,7 +15,7 @@ namespace MVCProject.Models
         public string Password { get; set; }
         
         [MaxLength(50)]
-        [MinLength(8, ErrorMessage = "FullName must be more than 8 char")]
+        [MinLength(3, ErrorMessage = "FullName must be more than 2 char")] //Edited from 8 char --> 3 -- please don't edit it again
         public string Name { get; set; }
 
         [RegularExpression(@"^01[0125][0-9]{8}$", ErrorMessage = "Please Enter Valid Phone Number")]
