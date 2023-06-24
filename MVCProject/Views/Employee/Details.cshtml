@@ -20,7 +20,7 @@
                 <p class="card-text col-sm-6">Phone : </p> <p class="col-sm-6">@Model?.Phone</p>
                 <p class="card-text col-sm-6">Address : </p> <p class="col-sm-6">@Model?.Address</p>
                 <p class="card-text col-sm-6">Creation Date </p> <p class="col-sm-6">@Model?.creationDate</p>
-                <p class="card-text col-sm-6">Is Deleted : </p> <p class="col-sm-6">@Model?.IsDeleted</p>
+                <p class="card-text col-sm-6">Status : </p> <p class="col-sm-6">@(Model.IsDeleted ? "Unavailable" : "Available")</p>
             </div>
         </div>
 

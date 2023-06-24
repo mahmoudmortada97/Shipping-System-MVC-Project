@@ -9,8 +9,6 @@ namespace MVCProject.Repository.TraderRepo
     {
         AppDbContext _context;
 
-
->>>>>>> aaf6d917aed8a49390cb37fa016f1db0c536f0f1
         public TraderRepository(AppDbContext context)
         {
             _context = context;
