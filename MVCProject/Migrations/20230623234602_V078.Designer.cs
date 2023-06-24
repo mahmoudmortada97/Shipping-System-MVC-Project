@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230623145041_OrderModel")]
-    partial class OrderModel
+    [Migration("20230623234602_V078")]
+    partial class V078
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -310,6 +310,9 @@ namespace MVCProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -417,6 +420,9 @@ namespace MVCProject.Migrations
                     b.Property<int>("GoverId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("GovernorateId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -456,7 +462,7 @@ namespace MVCProject.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.HasIndex("GoverId");
+                    b.HasIndex("GovernorateId");
 
                     b.ToTable("Trader");
                 });
@@ -512,7 +518,7 @@ namespace MVCProject.Migrations
             modelBuilder.Entity("MVCProject.Models.City", b =>
                 {
                     b.HasOne("MVCProject.Models.Governorate", "Governorate")
-                        .WithMany("City")
+                        .WithMany("Cities")
                         .HasForeignKey("GoverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -565,7 +571,7 @@ namespace MVCProject.Migrations
                         .IsRequired();
 
                     b.HasOne("MVCProject.Models.Trader", "Trader")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("TraderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -626,22 +632,20 @@ namespace MVCProject.Migrations
             modelBuilder.Entity("MVCProject.Models.Trader", b =>
                 {
                     b.HasOne("MVCProject.Models.Branch", "Branch")
-                        .WithMany()
+                        .WithMany("Traders")
                         .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MVCProject.Models.City", "City")
-                        .WithMany()
+                        .WithMany("Traders")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MVCProject.Models.Governorate", "Governorate")
-                        .WithMany()
-                        .HasForeignKey("GoverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Traders")
+                        .HasForeignKey("GovernorateId");
 
                     b.Navigation("Branch");
 
@@ -669,9 +673,21 @@ namespace MVCProject.Migrations
                     b.Navigation("Trader");
                 });
 
+            modelBuilder.Entity("MVCProject.Models.Branch", b =>
+                {
+                    b.Navigation("Traders");
+                });
+
+            modelBuilder.Entity("MVCProject.Models.City", b =>
+                {
+                    b.Navigation("Traders");
+                });
+
             modelBuilder.Entity("MVCProject.Models.Governorate", b =>
                 {
-                    b.Navigation("City");
+                    b.Navigation("Cities");
+
+                    b.Navigation("Traders");
                 });
 
             modelBuilder.Entity("MVCProject.Models.Order", b =>
@@ -681,6 +697,8 @@ namespace MVCProject.Migrations
 
             modelBuilder.Entity("MVCProject.Models.Trader", b =>
                 {
+                    b.Navigation("Orders");
+
                     b.Navigation("SpecialPriceForCities");
                 });
 #pragma warning restore 612, 618

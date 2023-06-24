@@ -1,0 +1,28 @@
+﻿@model MVCProject.Models.Branch
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container">
+
+    <div class="row justify-content-center">
+
+        <div class="card col-md-8" style="width:300px">
+            <div class="card-body row">
+                <h4 class="card-title col-sm-12">@Model?.Name</h4>
+                <p class="card-text col-sm-6">ID : </p> <p class="col-sm-6">@Model?.Id</p>
+                <p class="card-text col-sm-6">Creation Date : </p> <p class="col-sm-6">@Model?.CreationDate</p>
+                <p class="card-text col-sm-6">Is Deleted : </p> <p class="col-sm-6">@Model?.IsDeleted</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-md-5">
+        <a class="btn btn-outline-success me-5" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+        <a class="btn btn-outline-secondary ms-3" asp-action="Index">Back to List</a>
+    </div>
+
+</div>
+
+

@@ -4,6 +4,7 @@ using MVCProject.Models;
 using MVCProject.Repository.AccountRepo;
 using MVCProject.Repository.BranchRepo;
 using MVCProject.Repository.CityRepo;
+using MVCProject.Repository.DiscountTypeRepo;
 using MVCProject.Repository.EmployeeRepo;
 using MVCProject.Repository.GovernorateRepo;
 using MVCProject.Repository.OrderRepo;
@@ -31,6 +32,7 @@ namespace MVCProject
             builder.Services.AddScoped<ICityRepository, CityRepository>();
             builder.Services.AddScoped<IAccountRepository, AccountRepository>();
             builder.Services.AddScoped<IOrderRepository,OrderRepository>();
+            builder.Services.AddScoped<IDiscountTypeRepository,DiscountTypeRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(
                         builder.Configuration.GetConnectionString("CS")));

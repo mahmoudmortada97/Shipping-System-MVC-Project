@@ -5,7 +5,7 @@
 namespace MVCProject.Migrations
 {
     /// <inheritdoc />
-    public partial class addListOfOrdersInTraderTable : Migration
+    public partial class V079 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
