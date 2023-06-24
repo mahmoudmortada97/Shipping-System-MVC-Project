@@ -36,11 +36,12 @@ namespace MVCProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(City city)
+        public IActionResult Create(City city,int id)
         {
+            var gov = _governRepository.GetById(id).Id;
             if (ModelState.IsValid)
             {
-
+                city.Id = default;
                 _cityRepository.Add(city);
                 _cityRepository.Save();
                 return RedirectToAction("Index");

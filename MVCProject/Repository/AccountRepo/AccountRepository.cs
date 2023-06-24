@@ -26,7 +26,7 @@ namespace MVCProject.Repository.AccountRepo
 
         public Trader FindTrader(string email, string password)
         {
-            var trader = _context.Trader.FirstOrDefault(e => e.Email == email && e.Password == password);
+            var trader = _context.Traders.FirstOrDefault(e => e.Email == email && e.Password == password);
             return trader;
         }
     }

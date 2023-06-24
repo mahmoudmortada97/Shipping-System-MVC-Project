@@ -8,7 +8,7 @@ namespace MVCProject.Repository.TraderRepo
         List<Trader> GetAll();
         Trader GetById(int id);
         //Trader GetByName(string name);
-        void Add(Trader trader);
+        void Create(Trader trader);
         void Edit(Trader trader);
         void Delete(int id);
         void Save();

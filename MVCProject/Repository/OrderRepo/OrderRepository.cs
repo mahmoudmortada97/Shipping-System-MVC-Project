@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MVCProject.Models;
-
+using Microsoft.EntityFrameworkCore;
 namespace MVCProject.Repository.OrderRepo
 {
     public class OrderRepository:IOrderRepository
@@ -14,13 +14,13 @@ namespace MVCProject.Repository.OrderRepo
 
         public List<Order> GetAll()
         {
-            return _context.Orders.Where(e => e.IsDeleted == false).ToList();
+            return _context.Orders.Where(e => e.IsDeleted == false).Include(o=>o.ClientGovernorate).Include(o=>o.ClientCity).ToList();
         }
 
 
         public Order GetById(int id)
         {
-            return _context.Orders.FirstOrDefault(e => e.Id == id && e.IsDeleted == true)!;
+            return _context.Orders.FirstOrDefault(e => e.Id == id && e.IsDeleted == false)!;
         }
 
         public void Add(Order order)
@@ -32,7 +32,6 @@ namespace MVCProject.Repository.OrderRepo
         {
             _context.Orders.Entry(order).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }
-
         public void Delete(int id)
         {
             Order order = _context.Orders.Find(id)!;
@@ -43,16 +42,15 @@ namespace MVCProject.Repository.OrderRepo
             _context.SaveChanges();
         }
 
-        public decimal CalculateTotalPrice(int id)
+        public decimal CalculateTotalPrice(Order order)
         {
-            Order order = _context.Orders.Include(o => o.Products)
-                                            .Include(o => o.ClientCity)
-                                            .Include(o => o.OrderType)
-                                            .Include(o=>o.Trader)
-                                                .ThenInclude(t=>t.SpecialPriceForCities)
-                                                .FirstOrDefault()!;
+            //Order order = _context..Include(o => o.Products)
+            //                                .Include(o => o.ClientCity)
+            //                                .Include(o => o.OrderType)
+            //                                .Include(o=>o.Trader)
+            //                                    .ThenInclude(t=>t.SpecialPriceForCities)
+            //                                    .FirstOrDefault()!;
 
-            decimal price = 0;
 
             //Special Price for Trader within Specific City 
             //foreach (var item in order.Trader.SpecialPriceForCities)
@@ -63,30 +61,36 @@ namespace MVCProject.Repository.OrderRepo
             //        break;
             //        }   
             //}
+            decimal Price = 0;
 
-            price += CalculateCityPrice(order.ClientCity);     //City Price
+            var CityId = order.ClientCityId;
+            var DeliverTypeId = order.DeliveryTypeId;
 
-            price += CalculateOrderTypePrice(order.OrderType);  //Order Type Price
+            Price += CalculateCityPrice(CityId);     //City Price
 
-            price += CalculatePriceIfShippingToVillage(order);  //Shipping To Village Price
+            Price += CalculateOrderTypePrice(DeliverTypeId);  //Order Type Price
 
-            price += CalculatePriceOfOrderTotalWeigth(GetOrderWeight(order)); //Total Size Weight
+            Price += CalculatePriceIfShippingToVillage(order);  //Shipping To Village Price
 
-            return price;
+            Price += CalculatePriceOfOrderTotalWeigth(GetOrderWeight(order)); //Total Size Weight
+
+            return Price;
         }
 
-        public decimal CalculateCityPrice(City city)
+
+        public decimal CalculateCityPrice(int  id)
         {
+            City city = _context.Cities.Find(id);
             var cityPrice = city.ShippingCost;
             return cityPrice;
         }
 
-        public decimal CalculateOrderTypePrice(OrderType orderType)
+        public decimal CalculateOrderTypePrice(int deliverTypeId)
         {
-            var orderPrice = orderType.Price;
+            DeliverType deliverType = _context.DeliverTypes.Find(deliverTypeId);
+            var orderPrice = deliverType.Price;
             return orderPrice;
         }
-
         public decimal CalculatePriceIfShippingToVillage(Order order)
         {
             decimal shippingToVillagePrice;

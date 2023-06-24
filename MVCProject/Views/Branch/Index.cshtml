@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MVCProject.Models.Branch>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary m-3">Branch</h6>
+        <a href="/branch/Add" class="btn btn-outline-success"> Create New Branch</a>
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>                    
+                        <th>Edit</th>
+                        <th>Details</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td><a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a></td>
+                            <td><a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id">Details</a></td>
+                            <td><a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

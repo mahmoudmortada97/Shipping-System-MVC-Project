@@ -1,0 +1,85 @@
+﻿@model IEnumerable<MVCProject.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="display-4 text-center alert alert-danger">All Orderes</h1>
+
+<p>
+    <a  class="btn btn-primary" asp-action="Create">Add New Order</a>
+</p>
+<table class="table table-bordered text-ceneter table-hover">
+    <thead>
+        <tr>
+            <th>
+               #
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+               Client Details
+            </th>
+            <th>
+                Governorate
+            </th>
+            <th>
+                City
+            </th>
+            <th>
+               Order Cost
+            </th>
+            <th>
+                Edit Order
+            </th>
+            <th>
+                Edit Status
+            </th>
+            <th>
+                Delete
+            </th>
+            <th>
+                <i class="fa-solid fa-print"></i>
+            </th>
+        </tr>
+    </thead>
+    <tbody class="">
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.creationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientName)<br/>
+                    @Html.DisplayFor(modelItem => item.ClientPhone1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientGovernorate.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientCity.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><i role="button" class="fa-solid fa-pen-to-square text-success"></i></a>
+            </td>
+            <td>
+                <button class="btn btn-primary">Status</button>
+            </td>
+            <td>
+                    <i role="button" class="fa-solid fa-trash text-danger"></i>
+                </td>
+            <td>
+                    <i role="button" class="fa-solid fa-print text-primary"></i>
+                </td>
+           
+        </tr>
+}
+    </tbody>
+</table>

@@ -4,6 +4,7 @@
 }
 
 <h1>Index</h1>
+
 <table class="table table-bordered table-hover">
     <tr>
         <th>ID</th>
@@ -20,7 +21,7 @@
             <td>@item.ShippingCost</td>
             <td><a href="/City/Edit/@item.Id">Edit</a></td>
             <td>
-                <input type="submit" style="background-color:red;color:white" value="Delete" onclick="Delete(@item.Id)" />
+                <input type="submit" class="btn btn-danger mb-3" value="Delete" onclick="Delete(@item.Id)" />
             </td>
            
         </tr>
@@ -31,21 +32,24 @@
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script>
         function Delete(id) {
-            confirm(`Are you sure you want delete this item `)
-            $.ajax({
-                type: "POST",
-                url: `@Url.Action("Delete")`,
-                data: { id: id },
-                dataType: "text",
-                success: function (response) {
-                    if (response.trim() == "sucsses") {
-                        $("#row_" + id).remove()
+            if (confirm(`Are you sure you want delete this item `)) {
+
+                $.ajax({
+                    type: "POST",
+                    url: `@Url.Action("Delete")`,
+                    data: { id: id },
+                    dataType: "text",
+                    success: function (response) {
+                        if (response.trim() == "sucsses") {
+                            $("#row_" + id).remove()
+                        }
+                    },
+                    error: function () {
+                        alert("Error while deleting data");
                     }
-                },
-                error: function () {
-                    alert("Error while deleting data");
-                }
-            });
+                });
+            }
+           
         }
     </script>
 }

@@ -46,6 +46,7 @@ namespace MVCProject.Controllers
         {
             if (ModelState.IsValid)
             {
+               
                 _governRepository.Add(governorate);
                 _governRepository.Save();
                 return RedirectToAction("Index");
