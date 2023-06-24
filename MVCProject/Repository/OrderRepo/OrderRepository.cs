@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MVCProject.Models;
-
+using Microsoft.EntityFrameworkCore;
 namespace MVCProject.Repository.OrderRepo
 {
     public class OrderRepository:IOrderRepository
@@ -20,7 +20,7 @@ namespace MVCProject.Repository.OrderRepo
 
         public Order GetById(int id)
         {
-            return _context.Orders.FirstOrDefault(e => e.Id == id && e.IsDeleted == true)!;
+            return _context.Orders.FirstOrDefault(e => e.Id == id && e.IsDeleted == false)!;
         }
 
         public void Add(Order order)
@@ -32,7 +32,6 @@ namespace MVCProject.Repository.OrderRepo
         {
             _context.Orders.Entry(order).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }
-
         public void Delete(int id)
         {
             Order order = _context.Orders.Find(id)!;
