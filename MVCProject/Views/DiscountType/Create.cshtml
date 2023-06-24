@@ -8,8 +8,8 @@
 
 <h4>DiscountType</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="">
+    <div class="form-control">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -17,7 +17,7 @@
                 <input asp-for="Percentage" class="form-control" />
                 <span asp-validation-for="Percentage" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
