@@ -32,7 +32,7 @@ namespace MVCProject.Controllers
                     return RedirectToAction(nameof(LoginAsEmployee), 
                         new { email = acc.Email, password = acc.Password });
                 }
-                else if(acc.LoginType == LoginType.Employee.ToString())
+                else if(acc.LoginType == LoginType.Trader.ToString())
                 {
                     return RedirectToAction(nameof(LoginAsTrader),
                         new { email = acc.Email, password = acc.Password });
