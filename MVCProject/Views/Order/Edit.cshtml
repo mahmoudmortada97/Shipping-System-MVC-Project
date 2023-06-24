@@ -8,10 +8,9 @@
     SelectList branches = new SelectList(ViewBag.Branches, "Id", "Name");
     SelectList governorate = new SelectList(ViewBag.Governorates, "Id", "Name");
 }
-
 <h1>Edit</h1>
 
-<form asp-action="Create" method="post">
+<form asp-action="Edit" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="form-group">
@@ -21,8 +20,6 @@
         </select>
         <span asp-validation-for="OrderTypeId" class="text-danger"></span>
     </div>
-
-
 
 
     <div class="form-group">
@@ -145,10 +142,8 @@
 
 
 
-
-
     <div class="form-group">
-        <input type="submit" value="Update" class="btn btn-primary" />
+        <input  type="submit" value="Update" class="btn btn-primary" />
     </div>
 </form>
 

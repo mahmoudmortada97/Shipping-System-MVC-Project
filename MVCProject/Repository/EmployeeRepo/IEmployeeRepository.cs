@@ -7,9 +7,9 @@ namespace MVCProject.Repository.EmployeeRepo
     {
         List<Employee> GetAll();
         Employee GetById(int id);
-        void Add(Employee employee);
+        void Create(Employee employee);
         void Edit(Employee employee);
-        void Delete(int  id);
+        void Delete(int id);
         void Save();
     }
 }

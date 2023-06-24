@@ -57,9 +57,9 @@ namespace MVCProject.Controllers
         }
         public IActionResult Delete(int id)
         {
-            _discountTypeRepository.Delete(id);
+            _discountTypeRepository.Delete(id); 
             _discountTypeRepository.Save();
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }

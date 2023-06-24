@@ -35,17 +35,17 @@ namespace MVCProject.Controllers
             return View(trader);
         }
 
-        public IActionResult Add()
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Add(Trader trader)
+        public IActionResult Create(Trader trader)
         {
             if (ModelState.IsValid)
             {
-                _traderRepository.Add(trader);
+                _traderRepository.Create(trader);
                 //_traderRepository.Save();
                 return RedirectToAction("Index", "Home");
             }

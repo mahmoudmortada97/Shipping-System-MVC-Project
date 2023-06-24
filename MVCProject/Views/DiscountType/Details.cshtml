@@ -1,0 +1,23 @@
+﻿@model MVCProject.Models.DiscountType
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container">
+
+    <div class="row justify-content-center">
+
+        <div class="card col-md-8" style="width:300px">
+            <div class="card-body row">
+                <h4 class="card-title col-sm-12">DisCount</h4>
+                <p class="card-text col-sm-6">Percentage : </p> <p class="col-sm-6">@Model?.Percentage</p>
+        </div>
+    </div>
+    <br />
+    <div class="m-md-5">
+        <a class="btn btn-outline-success me-5" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+        <a class="btn btn-outline-secondary ms-3" asp-action="Index">Back to List</a>
+    </div>
+
+</div>
