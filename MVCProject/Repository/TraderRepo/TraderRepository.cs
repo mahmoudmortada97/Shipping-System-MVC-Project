@@ -8,7 +8,9 @@ namespace MVCProject.Repository.TraderRepo
     public class TraderRepository : ITraderRepository
     {
         AppDbContext _context;
-        
+
+
+>>>>>>> aaf6d917aed8a49390cb37fa016f1db0c536f0f1
         public TraderRepository(AppDbContext context)
         {
             _context = context;
@@ -21,13 +23,14 @@ namespace MVCProject.Repository.TraderRepo
 
         public Trader GetById(int id)
         {
+
             return _context.Traders.FirstOrDefault(e => e.Id == id && e.IsDeleted == false)!;//uncommented
+
         }
 
         public void Create(Trader trader) //changed from (Add --> Create) in all places 
         {
             _context.Traders.Add(trader); //uncommented
-  
         }
 
         public void Edit(Trader trader)

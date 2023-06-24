@@ -13,7 +13,7 @@ namespace MVCProject.Models
 
         [ForeignKey("Trader")]
         public int TraderId { get; set; }
-        public Trader Trader { get; set; }
+        public Trader? Trader { get; set; }
 
 
         //City prop created by salah && rizk

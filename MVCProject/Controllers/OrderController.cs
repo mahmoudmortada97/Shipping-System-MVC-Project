@@ -104,7 +104,12 @@ namespace MVCProject.Controllers
                 _orderRepository.Save();
                 return RedirectToAction("Index");
             }
-        return View(order);
+            ViewData["DeliverTypes"] = _deliverTypeRepository.GetAll();
+            ViewData["OrderTypes"] = _orderTypeRepository.GetAll();
+            ViewData["PaymentMethods"] = _paymentMethodRepository.GetAll();
+            ViewData["Branches"] = _branchRepository.GetAll();
+            ViewData["Governorates"] = _ghostRepository.GetAll();
+            return View(order);
         }
     }
 }
