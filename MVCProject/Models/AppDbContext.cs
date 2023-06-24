@@ -35,6 +35,5 @@ namespace MVCProject.Models
 
         }
 
-        public DbSet<MVCProject.Models.Trader> Trader { get; set; } = default!;
     }
 }
