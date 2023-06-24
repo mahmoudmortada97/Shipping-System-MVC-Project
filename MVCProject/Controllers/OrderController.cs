@@ -10,9 +10,9 @@ namespace MVCProject.Controllers
         {
             _orderRepository = orderRepository;   
         }
-        public IActionResult Index()
+        public IActionResult Index(string word)
         {
-            
+
             return View();
         }
     }

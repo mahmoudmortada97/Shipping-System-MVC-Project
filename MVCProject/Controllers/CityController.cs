@@ -19,7 +19,8 @@ namespace MVCProject.Controllers
         public IActionResult Index(string word)
         {
             List<City> cities;          
-            cities= _cityRepository.GetAll();            
+            cities= _cityRepository.GetAll();     
+           
             return View(cities);
         }
         public IActionResult Details(int id)
@@ -30,7 +31,7 @@ namespace MVCProject.Controllers
         public IActionResult Create(int id)
         {
             ViewData["GovList"] = _governRepository.GetAll();
-            ViewData["gov_id"] = _governRepository.GetById(id);
+            ViewData["gov_id"] = _governRepository.GetById(id).Id;
             return View();
         }
 
