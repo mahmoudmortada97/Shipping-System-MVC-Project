@@ -23,6 +23,7 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Role</th>
+                        <th>Branch</th>
                         <th>Details</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -38,6 +39,7 @@
                             <td>@item.Id</td>
                             <td>@item.Name</td>
                             <td>@item.Role</td>
+                            <td>@item.Branch.Name</td>
                             <td><a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id">Details</a></td>
                             <td><a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> </td>
                             <td>

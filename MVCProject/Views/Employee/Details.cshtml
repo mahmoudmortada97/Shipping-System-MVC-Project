@@ -9,21 +9,24 @@
 <div class="container">
 
     <div class="row justify-content-center">
-        <div class="card" style="width:300px">
-            <div class="card-body">
-                <h4 class="card-title">@Model?.Name</h4>
-                <p class="card-text">ID : @Model?.Id</p>
-                <p class="card-text">Email : @Model?.Email</p>
-                <p class="card-text">Phone : @Model?.Phone</p>
 
-                <p class="card-text">Address :@Model?.Address</p>
-                <p class="card-text">Creation Date : @Model?.creationDate</p>
-                <p class="card-text">Is Deleted : @Model?.IsDeleted</p>
-
-
-                <a class="btn btn-outline-secondary me-3" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-                <a class="btn btn-outline-secondary ms-3" asp-action="Index">Back to List</a>
+        <div class="card col-md-8" style="width:300px">
+            <div class="card-body row">
+                <h4 class="card-title col-sm-12">@Model?.Name</h4>
+                <p class="card-text col-sm-6">ID : </p> <p class="col-sm-6">@Model?.Id</p>
+                <p class="card-text col-sm-6">Role : </p> <p class="col-sm-6">@Model?.Role</p>
+                <p class="card-text col-sm-6">Email : </p> <p class="col-sm-6">@Model?.Email</p>
+                <p class="card-text col-sm-6">Password : </p> <p class="col-sm-6">@Model?.Password</p>
+                <p class="card-text col-sm-6">Phone : </p> <p class="col-sm-6">@Model?.Phone</p>
+                <p class="card-text col-sm-6">Address : </p> <p class="col-sm-6">@Model?.Address</p>
+                <p class="card-text col-sm-6">Creation Date </p> <p class="col-sm-6">@Model?.creationDate</p>
+                <p class="card-text col-sm-6">Is Deleted : </p> <p class="col-sm-6">@Model?.IsDeleted</p>
             </div>
+        </div>
+
+        <div class="col-md-6 text-center my-3">
+            <a class="btn btn-outline-success me-5" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+            <a class="btn btn-outline-secondary ms-3" asp-action="Index">Back to List</a>
         </div>
     </div>
 
