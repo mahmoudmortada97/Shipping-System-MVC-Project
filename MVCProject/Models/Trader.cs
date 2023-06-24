@@ -13,9 +13,8 @@ namespace MVCProject.Models
 
         public int TraderTaxForRejectedOrders { get; set; }
 
-        //City and govern,branch prop created by salah && rizk 
 
-        [ForeignKey("Government")]
+        [ForeignKey("Governorate")]
         public int GoverId { get; set; }
         public virtual Governorate? Governorate { get; set; }
 

@@ -10,11 +10,13 @@ namespace MVCProject.Repository.OrderRepo
         void Edit(Order order);
         void Delete(int id);
         void Save();
-        decimal CalculateTotalPrice(int id);
 
-        decimal CalculateCityPrice(City city);
 
-        decimal CalculateOrderTypePrice(OrderType orderType);
+        decimal CalculateTotalPrice(Order order);
+
+        decimal CalculateCityPrice(int cityId);
+
+        decimal CalculateOrderTypePrice(int deliverTypeId);
 
         decimal CalculatePriceIfShippingToVillage(Order order);
 

@@ -80,6 +80,9 @@ namespace MVCProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -190,7 +193,8 @@ namespace MVCProject.Migrations
 
                     b.Property<string>("ClientName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ClientPhone1")
                         .IsRequired()
@@ -218,8 +222,14 @@ namespace MVCProject.Migrations
                     b.Property<int>("PaymentMethodId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("TraderId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Village_Street")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("creationDate")
                         .HasColumnType("datetime2");
@@ -273,9 +283,6 @@ namespace MVCProject.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -417,9 +424,6 @@ namespace MVCProject.Migrations
                     b.Property<int>("GoverId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("GovernorateId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -459,7 +463,7 @@ namespace MVCProject.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.HasIndex("GovernorateId");
+                    b.HasIndex("GoverId");
 
                     b.ToTable("Traders");
                 });
@@ -642,7 +646,9 @@ namespace MVCProject.Migrations
 
                     b.HasOne("MVCProject.Models.Governorate", "Governorate")
                         .WithMany("Traders")
-                        .HasForeignKey("GovernorateId");
+                        .HasForeignKey("GoverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Branch");
 
