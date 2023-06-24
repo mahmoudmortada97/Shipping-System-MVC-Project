@@ -1,4 +1,5 @@
-﻿using MVCProject.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MVCProject.Models;
 
 namespace MVCProject.Repository.CityRepo
 {

@@ -32,8 +32,9 @@ namespace MVCProject.Controllers
         }
         public IActionResult Details(int id)
         {
-            var gov = _cityRepository.GetAllCitiesByGovId(id);
-            return View(gov);
+            var cites = _cityRepository.GetAllCitiesByGovId(id);
+            ViewData["GovName"]=_governRepository.GetById(id).Name;
+            return View(cites);
         }
         public IActionResult Create()
         {

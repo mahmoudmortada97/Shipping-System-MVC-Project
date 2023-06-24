@@ -19,7 +19,8 @@ namespace MVCProject.Controllers
         public IActionResult Index(string word)
         {
             List<City> cities;          
-            cities= _cityRepository.GetAll();            
+            cities= _cityRepository.GetAll();     
+           
             return View(cities);
         }
         public IActionResult Details(int id)

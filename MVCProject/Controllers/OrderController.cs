@@ -40,8 +40,9 @@ namespace MVCProject.Controllers
 
             
         }
-        public IActionResult Index()
+        public IActionResult Index(string word)
         {
+
             
            List<Order> orders = _orderRepository.GetAll();
             return View(orders);

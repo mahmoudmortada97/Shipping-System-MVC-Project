@@ -12,8 +12,7 @@ namespace MVCProject.Models
 
         public DateTime? CreationDate { get; set; } = DateTime.Now;
 
-        [Required]
-        public bool? IsDeleted { get; set; } = false;
-        public List<Trader>? Traders { get; set; }
+        public bool IsDeleted { get; set; } = false;
+        public List<Trader> Traders { get; set; }
     }
 }
