@@ -48,7 +48,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                <input/>
+                @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.creationDate)
