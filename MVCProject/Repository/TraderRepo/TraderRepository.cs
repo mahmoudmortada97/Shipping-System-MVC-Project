@@ -1,6 +1,6 @@
-﻿using MVCProject.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MVCProject.Models;
 using MVCProject.Repository.TraderRepo;
-
 
 namespace MVCProject.Repository.TraderRepo
 {
@@ -14,29 +14,40 @@ namespace MVCProject.Repository.TraderRepo
 
         public List<Trader> GetAll()
         {
-            return _context.Traders.Where(e => e.IsDeleted == false).ToList(); //uncommented
+            return _context.Traders.Where(t => t.IsDeleted == false)
+                .Include(t => t.Governorate)
+                .Include(t =>t.City)
+                .Include(t =>t.Branch).ToList();
         }
 
-        public Trader GetById(int id)
+        public Trader GetById(int id, bool includeRelatedEntities = true)
         {
-
-            return _context.Traders.FirstOrDefault(e => e.Id == id && e.IsDeleted == false)!;//uncommented
+            if (includeRelatedEntities)
+            {
+                return _context.Traders
+                    .Include(t => t.Branch)
+                    .Include(t => t.Governorate)
+                    .Include(t => t.City)
+                    .FirstOrDefault(t => t.Id == id)!;
+            }
+            return _context.Traders.FirstOrDefault(t => t.Id == id && t.IsDeleted == false)!;
         }
 
-        public void Create(Trader trader) //changed from (Add --> Create) in all places 
+        public void Create(Trader trader) 
         {
-            _context.Traders.Add(trader); //uncommented
+            _context.Traders.Add(trader); 
         }
 
         public void Edit(Trader trader)
         {
-            _context.Traders.Entry(trader).State = Microsoft.EntityFrameworkCore.EntityState.Modified; //uncommented
+            _context.Traders.Entry(trader).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }
 
         public void Delete(int id)
         {
-            Trader trader = _context.Traders.Find(id)!;
-            trader.IsDeleted = true;
+            Trader trader = _context.Traders.Find(id);
+            _context.Traders.Remove(trader);
+            _context.SaveChanges();
         }
 
         public void Save()

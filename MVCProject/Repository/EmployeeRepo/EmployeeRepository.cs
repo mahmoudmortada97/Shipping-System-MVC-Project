@@ -22,6 +22,16 @@ namespace MVCProject.Repository.EmployeeRepo
         {
             return _context.Employees.FirstOrDefault(e => e.Id == id && e.IsDeleted == false)!;
         }
+        public Employee GetById(int id, bool includeRelatedEntities = true)
+        {
+            if (includeRelatedEntities)
+            {
+                return _context.Employees
+                    .Include(e => e.Branch)
+                    .FirstOrDefault(e => e.Id == id)!;
+            }
+            return _context.Employees.FirstOrDefault(e => e.Id == id && e.IsDeleted == false)!;
+        }
 
         public void Create(Employee employee)
         {

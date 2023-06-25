@@ -6,7 +6,7 @@ namespace MVCProject.Repository.EmployeeRepo
     public interface IEmployeeRepository
     {
         List<Employee> GetAll();
-        Employee GetById(int id);
+        Employee GetById(int id, bool includeRelatedEntities = true);
         void Create(Employee employee);
         void Edit(Employee employee);
         void Delete(int id);

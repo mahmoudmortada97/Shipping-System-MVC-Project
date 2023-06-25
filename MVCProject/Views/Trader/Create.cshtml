@@ -26,10 +26,12 @@
                 <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDeleted" /> Is Deleted
-                </label>
+            <div class="form-group">
+                <label asp-for="BranchId" class="control-label"></label>
+                <select asp-for="BranchId" asp-items="ViewBag.BranchList" class="form-control">
+                    <option value="0">--Select Branch--</option>
+                </select>
+                <span asp-validation-for="BranchId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Phone" class="control-label"></label>
@@ -47,6 +49,20 @@
                 <span asp-validation-for="StoreName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="GoverId" class="control-label"></label>
+                <select asp-for="GoverId" asp-items="ViewBag.GovernList" class="form-control">
+                    <option value="0">--Select Governorate--</option>
+                </select>
+                <span asp-validation-for="GoverId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CityId" class="control-label"></label>
+                <select asp-for="CityId" asp-items="ViewBag.CityList" class="form-control">
+                    <option value="0">--Select City--</option>
+                </select>
+                <span asp-validation-for="CityId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="SpecialPickupCost" class="control-label"></label>
                 <input asp-for="SpecialPickupCost" class="form-control" />
                 <span asp-validation-for="SpecialPickupCost" class="text-danger"></span>
@@ -55,6 +71,23 @@
                 <label asp-for="TraderTaxForRejectedOrders" class="control-label"></label>
                 <input asp-for="TraderTaxForRejectedOrders" class="form-control" />
                 <span asp-validation-for="TraderTaxForRejectedOrders" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="creationDate" class="control-label"></label>
+                <input asp-for="creationDate" class="form-control" />
+                <span asp-validation-for="creationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsDeleted" /> Is Deleted
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="disabledTextInput" asp-for="Role" class="control-label"></label>
+                <select id="disabledTextInput" asp-for="Role" class="form-control">
+                    <option value="Trader">Trader</option>
+                </select>
+                <span asp-validation-for="Role" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
