@@ -15,12 +15,21 @@ namespace MVCProject.Repository.EmployeeRepo
 
         public List<Employee> GetAll()
         {
-            return _context.Employees.Where(e => e.IsDeleted == false).ToList();
+            return _context.Employees.Where(e => e.IsDeleted == false).Include(e =>e.Branch).ToList();
         }
-
 
         public Employee GetById(int id)
         {
+            return _context.Employees.FirstOrDefault(e => e.Id == id && e.IsDeleted == false)!;
+        }
+        public Employee GetById(int id, bool includeRelatedEntities = true)
+        {
+            if (includeRelatedEntities)
+            {
+                return _context.Employees
+                    .Include(e => e.Branch)
+                    .FirstOrDefault(e => e.Id == id)!;
+            }
             return _context.Employees.FirstOrDefault(e => e.Id == id && e.IsDeleted == false)!;
         }
 
@@ -44,19 +53,7 @@ namespace MVCProject.Repository.EmployeeRepo
         public void Save()
         {
             _context.SaveChanges();
-        }
-
-        //public void Delete(int id)
-        //{
-        //    Employee employee = _context.Employees.Find(id)!;
-
-        //    employee.IsDeleted = true;
-
-        //    // Delete Course
-
-        //    Employee? employeeSelected = _context.Employees.Where(e => e.IsDeleted == false).FirstOrDefault(e => e.Id == id);
-
-    
+        }    
 
     }
 }

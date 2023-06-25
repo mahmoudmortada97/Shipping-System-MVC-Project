@@ -1,0 +1,140 @@
+﻿@model OrderStatusViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+<style>
+    .card-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+         /* Adjust the width as needed */
+    }
+</style>
+<h1>All Orders</h1>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                     <h2>New</h2>
+                    <h5 class="card-title">
+                        <h4 class="card-title"><i class="fa-sharp fa-solid fa-bag-shopping"></i></h4>
+                    </h5>
+                    <p class="h3 card-text">@Model.NewCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h2>pending</h2>
+                    <h5 class="card-title">
+                        <h4 class="card-title"><i class="fa-sharp fa-solid fa-bag-shopping"></i></h4>
+                    </h5>
+                    <p class="h3 card-text">@Model.pendingCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h2>order has delivered</h2>
+                    <h5 class="card-title">
+                        <h4 class="card-title"><i class="fa-sharp fa-solid fa-bag-shopping"></i></h4>
+                    </h5>
+                    <p class="h3 card-text">@Model.The_order_has_been_deliveredCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h2>delivered to REP. </h2>
+                    <h5 class="card-title">
+                        <h4 class="card-title"><i class="fa-sharp fa-solid fa-bag-shopping"></i></h4>
+                    </h5>
+                    <p class="h3 card-text">@Model.sent_delivered_handedCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h2>Cann't reach</h2>
+                    <h5 class="card-title">
+                        <h4 class="card-title"><i class="fa-sharp fa-solid fa-bag-shopping"></i></h4>
+                    </h5>
+                    <p class="h3 card-text">@Model.Can_not_reachCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h2>postponed</h2>
+                    <h5 class="card-title">
+                        <h4 class="card-title"><i class="fa-sharp fa-solid fa-bag-shopping"></i></h4>
+                    </h5>
+                    <p class="h3 card-text">@Model.postponedCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h2>Partially delivered</h2>
+                    <h5 class="card-title">
+                        <h4 class="card-title"><i class="fa-sharp fa-solid fa-bag-shopping"></i></h4>
+                    </h5>
+                    <p class="h3 card-text">@Model.Partially_deliveredCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h2>Canceled by Client</h2>
+                    <h5 class="card-title">
+                        <h4 class="card-title"><i class="fa-sharp fa-solid fa-bag-shopping"></i></h4>
+                    </h5>
+                    <p class="h3 card-text">@Model.Canceled_by_ClientCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h3>Refused & payment</h3>
+                    <h5 class="card-title">
+                        <h4 class="card-title"><i class="fa-sharp fa-solid fa-bag-shopping"></i></h4>
+                    </h5>
+                    <p class="h3 card-text">@Model.Refused_with_paymentCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h4>Refused & part payment</h4>
+                    <h5 class="card-title">
+                        <h4 class="card-title"><i class="fa-sharp fa-solid fa-bag-shopping"></i></h4>
+                    </h5>
+                    <p class="h3 card-text">@Model.Refused_with_part_paymentCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h3>Rejected & not paid</h3>
+                    <h5 class="card-title">
+                        <h4 class="card-title"><i class="fa-sharp fa-solid fa-bag-shopping"></i></h4>
+                    </h5>
+                    <p class="h3 card-text">@Model.Rejected_and_not_paidCount</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

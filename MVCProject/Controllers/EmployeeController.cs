@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVCProject.Models;
+using MVCProject.Repository.BranchRepo;
 using MVCProject.Repository.EmployeeRepo;
 
 namespace MVCProject.Controllers
@@ -9,10 +10,16 @@ namespace MVCProject.Controllers
     public class EmployeeController : Controller
     {
         IEmployeeRepository _employeeRepository;
-        public EmployeeController(IEmployeeRepository employeeRepository)
+        IBranchRepository _branchRepository;
+
+        //Dependency Injection
+        public EmployeeController(IEmployeeRepository employeeRepository, IBranchRepository branchRepository)
         {
             _employeeRepository = employeeRepository;
+            _branchRepository = branchRepository;
         }
+
+        // Display All Employees + Search
         public IActionResult Index(string word)
         {
             List<Employee> employees;
@@ -29,6 +36,7 @@ namespace MVCProject.Controllers
 
         }
 
+        // Display Card of only 1 Employee
         public IActionResult Details(int id)
         {
             Employee employee = _employeeRepository.GetById(id);
@@ -36,45 +44,77 @@ namespace MVCProject.Controllers
             return View(employee);
         }
 
+        //Create Employee
         public IActionResult Create()
         {
+            ViewBag.BranchList = _branchRepository.GetAll().Select(b => new SelectListItem
+            {
+                Value = b.Id.ToString(),
+                Text = b.Name
+            });
 
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(Employee employee)
         {
 
             if (ModelState.IsValid)
             {
 
-                _employeeRepository.Create(employee);
-                _employeeRepository.Save();
-                return RedirectToAction("Index", "Employee");
+                try
+                {
+                    _employeeRepository.Create(employee);
+                    _employeeRepository.Save();
+                    return RedirectToAction("Index", "Employee");
+                }
+                catch
+                {
+                    ModelState.AddModelError("BranchId","Please Select Branch");
+                }
 
             }
-
+            ViewBag.BranchList = _branchRepository.GetAll().Select(b => new SelectListItem
+            {
+                Value = b.Id.ToString(),
+                Text = b.Name
+            });
             return View(employee);
         }
 
+        //Edit Employee
         public IActionResult Edit(int id)
         {
             Employee employee = _employeeRepository.GetById(id);
+            ViewBag.BranchList = new SelectList(_branchRepository.GetAll(), "Id", "Name");
+
             return View(employee);
         }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(Employee employee)
         {
             if (ModelState.IsValid)
             {
-                _employeeRepository.Edit(employee);
-                _employeeRepository.Save();
-                return RedirectToAction("Index", "Employee");
+                try
+                {
+                    _employeeRepository.Edit(employee);
+                    _employeeRepository.Save();
+                    return RedirectToAction("Index", "Employee");
+                }
+                   catch
+                {
+                    ModelState.AddModelError("BranchId", "Please Select Branch");
+                }
             }
+            ViewBag.BranchList = new SelectList(_branchRepository.GetAll(), "Id", "Name");
             return View(employee);
         }
 
+        //Delete Employee
         public IActionResult Delete(int id)
         {
             Employee employee = _employeeRepository.GetById(id);
@@ -92,8 +132,5 @@ namespace MVCProject.Controllers
             _employeeRepository.Delete(id);
             return RedirectToAction("Index");
         }
-
-
-
     }
 }

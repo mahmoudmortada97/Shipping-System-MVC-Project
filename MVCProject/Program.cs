@@ -38,14 +38,12 @@ namespace MVCProject
             builder.Services.AddScoped<IOrderRepository,OrderRepository>();
             builder.Services.AddScoped<IDiscountTypeRepository,DiscountTypeRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
-            builder.Services.AddScoped<IDiscountTypeRepository, DiscountTypeRepository>();
             builder.Services.AddScoped<IOrderTypeRepository, OrderTypeRepository>();
             builder.Services.AddScoped<IDeliverTypeRepository, DeliverTypeRepository>();
             builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
             builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(
                         builder.Configuration.GetConnectionString("CS")));
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
-
 
             var app = builder.Build();
 

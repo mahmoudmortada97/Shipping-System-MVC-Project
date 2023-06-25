@@ -35,6 +35,5 @@ namespace MVCProject.Models
 
         }
 
-
     }
 }

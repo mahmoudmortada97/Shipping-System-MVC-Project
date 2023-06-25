@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVCProject.Models.Trader>
+﻿@model List<Trader>
 
 @{
     ViewData["Title"] = "Index";
@@ -18,19 +18,20 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Store Name</th>
-                        <th>Special Pickup Cost</th>
-                        <th>Trader Tax For Rejected Orders</th>
-                        <th>Governorate Id</th>
-                        <th>City</th>
-                        <th>Branch</th>
+                        <th>#</th>
+                        <th>Name</th>
                         <th>Email</th>
                         <th>Password</th>
-                        <th>Trader Name</th>
+                        <th>Branch</th>
                         <th>Phone</th>
                         <th>Address</th>
+                        <th>Store Name</th>
+                        <th>Governorate</th>
+                        <th>City</th>
+                        <th>Special Pickup Cost</th>
+                        <th>Trader Tax For Rejected Orders</th>
                         <th>Creation Date</th>
-                        <th>Is Deleted</th>
+                        <th>Status</th>
                         <th>Role</th>
                         <th>Details</th>
                         <th>Edit</th>
@@ -41,23 +42,33 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@item.StoreName</td>
-                            <td>@item.SpecialPickupCost</td>
-                            <td>@item.TraderTaxForRejectedOrders</td>
-                            <td>@item.GoverId</td>
-                            <td>@item?.City?.Id</td>
-                            <td>@item?.Branch?.Id</td>
+                            <td>@item?.Id</td>
+                            <td>@item?.Name</td>
                             <td>@item?.Email</td>
                             <td>@item?.Password</td>
-                            <td>@item?.Name</td>
+                            <td>@item?.Branch?.Name</td>
                             <td>@item?.Phone</td>
                             <td>@item?.Address</td>
+                            <td>@item?.StoreName</td>
+                            <td>@item?.Governorate?.Name</td>
+                            <td>@item?.City?.Name</td>
+                            <td>@item?.SpecialPickupCost</td>
+                            <td>@item?.TraderTaxForRejectedOrders</td>
                             <td>@item?.creationDate</td>
-                            <td>@item?.IsDeleted</td>
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="switch-@item.Id" @(item.IsDeleted ? "" : "checked")>
+                                </div>
+                            </td>
                             <td>@item?.Role</td>
                             <td><a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@item?.Id">Details</a></td>
                             <td><a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item?.Id">Edit</a></td>
-                            <td><a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item?.Id">Delete</a></td>
+                            <td>
+                                <form asp-action="Delete" method="post" onsubmit="return confirm('Are you sure you want to delete this trader?');">
+                                    <input type="hidden" name="id" value="@item?.Id" />
+                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     }
                 </tbody>

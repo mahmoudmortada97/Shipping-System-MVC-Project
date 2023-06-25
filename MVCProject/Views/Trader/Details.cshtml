@@ -6,72 +6,6 @@
 
 <h1>Trader Details</h1>
 
-@*<div>
-    
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-4">
-         Name
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-4">
-            Email
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-4">
-            Password
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-        <dt class = "col-sm-4">
-            Is Deleted
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-        <dt class = "col-sm-4">
-            Phone
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-        <dt class = "col-sm-4">
-            Address
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class = "col-sm-4">
-            Store Name
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.StoreName)
-        </dd>
-        <dt class = "col-sm-4">
-            Special Pickup Cost
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.SpecialPickupCost)
-        </dd>
-        <dt class = "col-sm-4">
-            Trader Tax For Rejected Orders
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.TraderTaxForRejectedOrders)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>*@
-
-
 <div class="container">
 
     <div class="row justify-content-center">
@@ -82,19 +16,24 @@
                 <p class="card-text col-sm-6">ID : </p> <p class="col-sm-6">@Model?.Id</p>
                 <p class="card-text col-sm-6">Email : </p> <p class="col-sm-6">@Model?.Email</p>
                 <p class="card-text col-sm-6">Password : </p> <p class="col-sm-6">@Model?.Password</p>
-                <p class="card-text col-sm-6">Is Deleted : </p> <p class="col-sm-6">@Model?.IsDeleted</p>
+                <p class="card-text col-sm-6">Branch : </p> <p class="col-sm-6">@Model?.Branch?.Name</p>
                 <p class="card-text col-sm-6">Phone : </p> <p class="col-sm-6">@Model?.Phone</p>
                 <p class="card-text col-sm-6">Address : </p> <p class="col-sm-6">@Model?.Address</p>
                 <p class="card-text col-sm-6">Store Name : </p> <p class="col-sm-6">@Model?.StoreName</p>
+                <p class="card-text col-sm-6">Governorate : </p> <p class="col-sm-6">@Model?.Governorate?.Name</p>
+                <p class="card-text col-sm-6">City : </p> <p class="col-sm-6">@Model?.City?.Name</p>
                 <p class="card-text col-sm-6">Special Pickup Cost : </p> <p class="col-sm-6">@Model?.SpecialPickupCost</p>
                 <p class="card-text col-sm-6">Trader Tax For Rejected Orders : </p> <p class="col-sm-6">@Model?.TraderTaxForRejectedOrders</p>
+                <p class="card-text col-sm-6">Creation Date : </p> <p class="col-sm-6">@Model?.creationDate</p>
+                <p class="card-text col-sm-6">Status : </p> <p class="col-sm-6">@(Model.IsDeleted ? "Unavailable" : "Available")</p>
+                <p class="card-text col-sm-6">Role : </p> <p class="col-sm-6">Trader</p>
             </div>
         </div>
     </div>
 
-    <div>
+    <div class="col-md-6 text-center my-3">
         <a class="btn btn-outline-success me-5" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-        <a class="btn btn-outline-secondary ms-3" asp-action="Index">Back to List</a>
+        <a class="btn btn-outline-secondary ms-5" asp-action="Index">Back to List</a>
     </div>
 
 </div>

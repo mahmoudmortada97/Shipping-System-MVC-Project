@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVCProject.Models;
 using MVCProject.Repository.BranchRepo;
-using MVCProject.Repository.CityRepo;
 using MVCProject.Repository.DiscountTypeRepo;
-using MVCProject.Repository.EmployeeRepo;
 using MVCProject.Repository.GovernorateRepo;
 using MVCProject.Repository.RepresentiveRepo;
 using MVCProject.ViewModel;
@@ -41,6 +39,10 @@ namespace MVCProject.Controllers
         public IActionResult Details(int id)
         {
             var rep = _representativeRepostiory.GetById(id);
+            rep.Governorate = _governRepository.GetById(rep.GovernorateId);
+            rep.Branch = _branchRepository.GetById(rep.BranchId);
+            rep.DiscountType = _discountTypeRepository.GetById(rep.DiscountTypeId);
+
             return View(rep);
         }
         public IActionResult Create()
@@ -51,17 +53,24 @@ namespace MVCProject.Controllers
                 Branchs = _branchRepository.GetAll(),
                 DiscountTypes = _discountTypeRepository.GetAll()
             };
-            return View();
+            return View(repViewModel);
         }
         [HttpPost]
         public IActionResult Create(RepresentativeGovBranchPercentageViewModel repViewModel)
         {
             if (!ModelState.IsValid)
             {
-                repViewModel.Governorates = _governRepository.GetAll();
-                repViewModel.Branchs = _branchRepository.GetAll();
-                repViewModel.DiscountTypes = _discountTypeRepository.GetAll();
-                return View(repViewModel);
+                try
+                {
+                    repViewModel.Governorates = _governRepository.GetAll();
+                    repViewModel.Branchs = _branchRepository.GetAll();
+                    repViewModel.DiscountTypes = _discountTypeRepository.GetAll();
+                    return View(repViewModel);
+                }
+                catch
+                {
+
+                }
             }
             var rep = new Representative
             {
