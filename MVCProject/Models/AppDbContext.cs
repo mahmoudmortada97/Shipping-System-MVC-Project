@@ -38,8 +38,6 @@ namespace MVCProject.Models
 
         }
 
-        public DbSet<MVCProject.ViewModel.OrderReporttWithOrderByStatusDateViewModel> OrderReporttWithOrderByStatusDateViewModel { get; set; } = default!;
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
