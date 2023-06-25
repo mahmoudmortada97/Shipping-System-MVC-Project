@@ -12,7 +12,7 @@ namespace MVCProject.ViewModel
         public string Status { get; set; }
 
         public string Trader { get; set; }
-        
+
         public string Client { get; set; }
 
 
@@ -39,5 +39,8 @@ namespace MVCProject.ViewModel
         public decimal CompanyRate { get; set; }
 
         public DateTime Date { get; set; } = DateTime.Now;
+
+
+        public bool IsDeleted { get; set; } = false;
     }
 }

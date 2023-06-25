@@ -46,7 +46,6 @@ namespace MVCProject.Controllers
                 ordersViewModel.Add(ordersViewModelItem);
 
             }
-            ViewData["OrderStates"] = _orderStateRepository.GetAll();
             return View(ordersViewModel);
         }
     }

@@ -38,7 +38,6 @@ namespace MVCProject.Models
 
         }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>().Property(m => m.creationDate).HasDefaultValueSql("GetDate()");

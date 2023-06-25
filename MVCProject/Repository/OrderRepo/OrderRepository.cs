@@ -14,7 +14,7 @@ namespace MVCProject.Repository.OrderRepo
 
         public List<Order> GetAll()
         {
-            return _context.Orders.Where(e => e.IsDeleted == false).Include(o=>o.ClientGovernorate).Include(o=>o.ClientCity).ToList();
+            return _context.Orders.Where(e => e.IsDeleted == false)/*.Include(o=>o.ClientGovernorate).Include(o=>o.ClientCity)*/.ToList();
         }
 
 
@@ -123,6 +123,11 @@ namespace MVCProject.Repository.OrderRepo
                     * _context.WeightSetting.Select(ws => ws.PriceForEachExtraKilo).FirstOrDefault();
             }
             return _context.WeightSetting.Select(ws => ws.DefaultSize).FirstOrDefault();
+        }
+
+        public List<Order> GetByOrderState(int stateId)
+        {
+            return _context.Orders.Where(o=>o.OrderStateId == stateId && o.IsDeleted == false)/*.Include(o=>o.ClientCity).Include(o=>o.ClientGovernorate)*/.ToList();
         }
     }
 }

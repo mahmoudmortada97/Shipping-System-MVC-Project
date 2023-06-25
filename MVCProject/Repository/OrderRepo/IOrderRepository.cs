@@ -11,6 +11,7 @@ namespace MVCProject.Repository.OrderRepo
         void Delete(int id);
         void Save();
 
+        List<Order> GetByOrderState(int stateId);
 
         decimal CalculateTotalPrice(Order order);
 

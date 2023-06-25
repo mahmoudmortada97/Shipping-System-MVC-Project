@@ -8,23 +8,10 @@
 <h1>Orders Reports</h1>
 
 
-<style>
-    .table-heading {
-        white-space: nowrap;
-        overflow-x: auto;
-    }
-</style>
 
 
-<div class="row my-3 flex-wrap ">
-    @foreach (var item in ViewBag.OrderStates)
-    {
-        <div class="col-md-3 my-1">
-            <button data-orderState="@item.Id" class="btn btn-primary">@item.Name</button>
-        </div>
-    }
 
-</div>
+
 
 <div class="card shadow mb-4 text-center">
     <div class="card-body">
