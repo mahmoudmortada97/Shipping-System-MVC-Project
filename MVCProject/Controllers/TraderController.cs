@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVCProject.Models;
+using MVCProject.Repository.OrderTypeRepo;
 using MVCProject.Repository.TraderRepo;
 
 namespace MVCProject.Controllers
@@ -75,5 +76,7 @@ namespace MVCProject.Controllers
             //_traderRepository.Save();
             return View();
         }
+
+      
     }
 }
