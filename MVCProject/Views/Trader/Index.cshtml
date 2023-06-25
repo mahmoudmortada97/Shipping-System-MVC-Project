@@ -10,8 +10,6 @@
     <a class="btn btn-outline-primary my-2" asp-action="Create">Create New</a>
 </p>
 
-
-<!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">
@@ -21,7 +19,6 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Password</th>
                         <th>Branch</th>
                         <th>Phone</th>
                         <th>Address</th>
@@ -30,8 +27,8 @@
                         <th>City</th>
                         <th>Special Pickup Cost</th>
                         <th>Trader Tax For Rejected Orders</th>
-                        <th>Creation Date</th>
                         <th>Status</th>
+                        <th>Creation Date</th>
                         <th>Role</th>
                         <th>Details</th>
                         <th>Edit</th>
@@ -45,7 +42,6 @@
                             <td>@item?.Id</td>
                             <td>@item?.Name</td>
                             <td>@item?.Email</td>
-                            <td>@item?.Password</td>
                             <td>@item?.Branch?.Name</td>
                             <td>@item?.Phone</td>
                             <td>@item?.Address</td>
@@ -54,12 +50,12 @@
                             <td>@item?.City?.Name</td>
                             <td>@item?.SpecialPickupCost</td>
                             <td>@item?.TraderTaxForRejectedOrders</td>
-                            <td>@item?.creationDate</td>
                             <td>
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" role="switch" id="switch-@item.Id" @(item.IsDeleted ? "" : "checked")>
                                 </div>
                             </td>
+                            <td>@item?.creationDate</td>
                             <td>@item?.Role</td>
                             <td><a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@item?.Id">Details</a></td>
                             <td><a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item?.Id">Edit</a></td>
