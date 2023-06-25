@@ -75,9 +75,18 @@ namespace MVCProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                _traderRepository.Create(trader);
-                _traderRepository.Save();
-                return RedirectToAction("Index", "Trader");
+                try
+                {
+                    _traderRepository.Create(trader);
+                    _traderRepository.Save();
+                    return RedirectToAction("Index", "Trader");
+                }
+                catch
+                {
+                    ModelState.AddModelError("GoverId", "Please Select Governorate");
+                    ModelState.AddModelError("BranchId", "Please Select Branch");
+                    ModelState.AddModelError("CityId", "Please Select City");
+                }
             }
             ViewBag.GovernList = _governRepository.GetAll().Select(g => new SelectListItem
             {
@@ -114,9 +123,18 @@ namespace MVCProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                _traderRepository.Edit(trader);
-                _traderRepository.Save();
-                return RedirectToAction("Index", "Trader");
+                try
+                {
+                    _traderRepository.Edit(trader);
+                    _traderRepository.Save();
+                    return RedirectToAction("Index", "Trader");
+                }
+                catch
+                {
+                    ModelState.AddModelError("GoverId", "Please Select Governorate");
+                    ModelState.AddModelError("BranchId", "Please Select Branch");
+                    ModelState.AddModelError("CityId", "Please Select City");
+                }
             }
             ViewBag.GovernList = new SelectList(_governRepository.GetAll(), "Id", "Name");
             ViewBag.CityList = new SelectList(_cityRepository.GetAll(), "Id", "Name");

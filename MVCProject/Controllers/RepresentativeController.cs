@@ -60,10 +60,17 @@ namespace MVCProject.Controllers
         {
             if (!ModelState.IsValid)
             {
-                repViewModel.Governorates = _governRepository.GetAll();
-                repViewModel.Branchs = _branchRepository.GetAll();
-                repViewModel.DiscountTypes = _discountTypeRepository.GetAll();
-                return View(repViewModel);
+                try
+                {
+                    repViewModel.Governorates = _governRepository.GetAll();
+                    repViewModel.Branchs = _branchRepository.GetAll();
+                    repViewModel.DiscountTypes = _discountTypeRepository.GetAll();
+                    return View(repViewModel);
+                }
+                catch
+                {
+
+                }
             }
             var rep = new Representative
             {

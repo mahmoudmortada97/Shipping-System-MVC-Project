@@ -7,24 +7,31 @@ namespace MVCProject.Models
     {
         public int Id { get; set; }
 
-        public string StoreName { get; set; } // we will add governement and city --> Mostafa   
+        [Display(Name = "Store Name")]
+        public string StoreName { get; set; }
 
-        public int SpecialPickupCost { get; set; }
+        [Display(Name = "Special Pickup Cost")]
+        public int? SpecialPickupCost { get; set; }
 
+        [Display(Name = "Trader Tax For Rejected Orders")]
         public int TraderTaxForRejectedOrders { get; set; }
 
-
+        [Display(Name = "Governorate")]
         [ForeignKey("Governorate")]
         public int GoverId { get; set; }
         public virtual Governorate? Governorate { get; set; }
 
+        [Display(Name = "City")]
         [ForeignKey("City")]
         public int CityId { get; set; }
         public virtual City? City { get; set; }
 
+        [Display(Name = "Branch")]
         [ForeignKey("Branch")]
         public int BranchId { get; set; }
         public virtual Branch? Branch { get; set; }
+
+
         public string Role { get; set; } = "Trader";
 
 

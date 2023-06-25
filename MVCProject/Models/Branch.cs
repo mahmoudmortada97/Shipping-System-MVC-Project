@@ -14,5 +14,6 @@ namespace MVCProject.Models
 
         public bool IsDeleted { get; set; } = false;
         public List<Trader> Traders { get; set; }
+        public List<Employee> Employees { get; set; }
     }
 }

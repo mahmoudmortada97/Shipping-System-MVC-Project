@@ -64,9 +64,16 @@ namespace MVCProject.Controllers
             if (ModelState.IsValid)
             {
 
-                _employeeRepository.Create(employee);
-                _employeeRepository.Save();
-                return RedirectToAction("Index", "Employee");
+                try
+                {
+                    _employeeRepository.Create(employee);
+                    _employeeRepository.Save();
+                    return RedirectToAction("Index", "Employee");
+                }
+                catch
+                {
+                    ModelState.AddModelError("BranchId","Please Select Branch");
+                }
 
             }
             ViewBag.BranchList = _branchRepository.GetAll().Select(b => new SelectListItem
@@ -92,9 +99,16 @@ namespace MVCProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                _employeeRepository.Edit(employee);
-                _employeeRepository.Save();
-                return RedirectToAction("Index", "Employee");
+                try
+                {
+                    _employeeRepository.Edit(employee);
+                    _employeeRepository.Save();
+                    return RedirectToAction("Index", "Employee");
+                }
+                   catch
+                {
+                    ModelState.AddModelError("BranchId", "Please Select Branch");
+                }
             }
             ViewBag.BranchList = new SelectList(_branchRepository.GetAll(), "Id", "Name");
             return View(employee);
