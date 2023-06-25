@@ -15,6 +15,7 @@ using MVCProject.Repository.ProductRepo;
 using MVCProject.Repository.RepresentativeRepo;
 using MVCProject.Repository.RepresentiveRepo;
 using MVCProject.Repository.TraderRepo;
+using MVCProject.Repository.WeightSettingRepo;
 
 namespace MVCProject
 {
@@ -40,6 +41,7 @@ namespace MVCProject
             builder.Services.AddScoped<IOrderTypeRepository, OrderTypeRepository>();
             builder.Services.AddScoped<IDeliverTypeRepository, DeliverTypeRepository>();
             builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
+            builder.Services.AddScoped<IWeightSettingRepository, WeightSettingRepository>();
             builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(
                         builder.Configuration.GetConnectionString("CS")));
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();

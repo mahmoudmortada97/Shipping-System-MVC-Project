@@ -106,6 +106,12 @@ namespace MVCProject.Controllers
             return View(trader);
         }
 
+        public IActionResult getCitesByGovernrate(int govId)
+        {
+            List<City> cities = _cityRepository.GetAllCitiesByGovId(govId);
+            return Json(cities);
+        }
+
         // Edit Trader
         public IActionResult Edit(int id)
         {

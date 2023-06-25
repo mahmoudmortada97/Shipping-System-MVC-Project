@@ -50,7 +50,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="GoverId" class="control-label"></label>
-                <select asp-for="GoverId" asp-items="ViewBag.GovernList" class="form-control">
+                <select asp-for="GoverId" asp-items="ViewBag.GovernList" class="form-control" onchange="getCitesInGovernrate()">
                     <option value="0">--Select Governorate--</option>
                 </select>
                 <span asp-validation-for="GoverId" class="text-danger"></span>
@@ -62,7 +62,6 @@
                 </select>
                 <span asp-validation-for="CityId" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <label for="disabledTextInput" asp-for="Role" class="control-label"></label>
                 <select id="disabledTextInput" asp-for="Role" class="form-control">
@@ -81,9 +80,6 @@
                 <input asp-for="TraderTaxForRejectedOrders" class="form-control" />
                 <span asp-validation-for="TraderTaxForRejectedOrders" class="text-danger"></span>
             </div>
-        
-      
-    
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -95,6 +91,33 @@
     <a class="btn btn-outline-secondary" asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+
+    <script src="/lib/jquery/dist/jquery.js"></script>
+
+    <script>
+        function getCitesInGovernrate() {
+            var governrateId = document.getElementById("GoverId").value;
+            console.log(governrateId);
+
+            $.ajax({
+                url: `/Trader/getCitesByGovernrate?govId=${governrateId}`,
+                success: function (result) {
+                    document.getElementById("CityId").innerHTML = "";
+
+                    for (let i of result) {
+                        document.getElementById("CityId").innerHTML +=
+                            `<option value=${i.id}>${i.name}</option>`
+                    }
+                }
+            });
+        }
+    </script>
 }
