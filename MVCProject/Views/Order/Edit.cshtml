@@ -56,8 +56,8 @@
 
     <div class="form-group">
         <label asp-for="ClientCityId" class="control-label"></label>
-        <select id="ClientCityId" governorate"" class="form-control" asp-for="ClientCityId">
-            <option value="0">----- Select Client City Type-------</option>
+        <select id="ClientCityId" governorate"" class="form-control" asp-for="ClientCityId" >
+            <option value="@Model.ClientCityId">@ViewBag.City</option>
         </select>
         <span asp-validation-for="ClientCityId" class="text-danger"></span>
     </div>

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<MVCProject.ViewModel.OrderReporttWithOrderByStatusDateViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+<h1>Orders Reports</h1>
+
+
+
+
+
+
+
+<div class="card shadow mb-4 text-center">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered mb-2"  id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.SerialNumber)</th>
+                            <th>@Html.DisplayNameFor(model => model.Status)</th>
+                            <th>@Html.DisplayNameFor(model => model.Trader)</th>
+                            <th>@Html.DisplayNameFor(model => model.Client)</th>
+                            <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                            <th>@Html.DisplayNameFor(model => model.Governorate)</th>
+                            <th>@Html.DisplayNameFor(model => model.City)</th>
+                            <th>@Html.DisplayNameFor(model => model.OrderPrice)</th>
+                            <th>@Html.DisplayNameFor(model => model.OrderPriceRecieved)</th>
+                            <th>@Html.DisplayNameFor(model => model.ShippingPrice)</th>
+                            <th>@Html.DisplayNameFor(model => model.ShippingPriceRecived)</th>
+                            <th>@Html.DisplayNameFor(model => model.CompanyRate)</th>
+                            <th>@Html.DisplayNameFor(model => model.Date)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.SerialNumber)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Trader)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Client)</td>
+                                <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Governorate)</td>
+                                <td>@Html.DisplayFor(modelItem => item.City)</td>
+                                <td>@Html.DisplayFor(modelItem => item.OrderPrice)</td>
+                                <td>@Html.DisplayFor(modelItem => item.OrderPriceRecieved)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ShippingPrice)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ShippingPriceRecived)</td>
+                                <td>@Html.DisplayFor(modelItem => item.CompanyRate)</td>
+                                <td >@Html.DisplayFor(modelItem => item.Date)</td>
+                            
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+                          

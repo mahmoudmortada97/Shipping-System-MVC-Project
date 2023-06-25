@@ -72,7 +72,7 @@ namespace MVCProject.Controllers
                 }
                 catch
                 {
-                    ModelState.AddModelError("BranchId","Please Select Branch");
+                    ModelState.AddModelError("BranchId", "Please Select Branch");
                 }
 
             }
@@ -105,7 +105,7 @@ namespace MVCProject.Controllers
                     _employeeRepository.Save();
                     return RedirectToAction("Index", "Employee");
                 }
-                   catch
+                catch
                 {
                     ModelState.AddModelError("BranchId", "Please Select Branch");
                 }

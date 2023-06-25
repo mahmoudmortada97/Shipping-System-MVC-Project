@@ -5,8 +5,10 @@ using MVCProject.Repository.CityRepo;
 using MVCProject.Repository.DeliverTypeRepo;
 using MVCProject.Repository.GovernorateRepo;
 using MVCProject.Repository.OrderRepo;
+using MVCProject.Repository.OrderStateRepo;
 using MVCProject.Repository.OrderTypeRepo;
 using MVCProject.Repository.PaymentMethodRepo;
+using MVCProject.ViewModel;
 using System.Security.Claims;
 
 namespace MVCProject.Controllers
@@ -20,6 +22,8 @@ namespace MVCProject.Controllers
         IPaymentMethodRepository _paymentMethodRepository;
         IGovernRepository _ghostRepository;
         ICityRepository _cityRepository;
+        IOrderStateRepository _orderStateRepository;
+
 
         public OrderController(IOrderRepository orderRepository , 
             IBranchRepository branchRepository ,
@@ -27,7 +31,8 @@ namespace MVCProject.Controllers
             IDeliverTypeRepository deliverTypeRepository,
             IPaymentMethodRepository paymentMethodRepository,
             IGovernRepository governRepository,
-            ICityRepository cityRepository
+            ICityRepository cityRepository,
+            IOrderStateRepository orderStateRepository
             )
         {
             _orderRepository = orderRepository;   
@@ -37,15 +42,38 @@ namespace MVCProject.Controllers
             _paymentMethodRepository = paymentMethodRepository;
             _ghostRepository = governRepository;
             _cityRepository = cityRepository;
-
+            _orderStateRepository = orderStateRepository;
             
         }
         public IActionResult Index(string word)
         {
 
+        List<Order> orders = _orderRepository.GetAll();
+
+        List<OrderReporttWithOrderByStatusDateViewModel> ordersViewModel = new List<OrderReporttWithOrderByStatusDateViewModel>();
             
-           List<Order> orders = _orderRepository.GetAll();
-            return View(orders);
+
+
+            foreach (var item in orders)
+            {
+                City city = _cityRepository.GetById(item.ClientCityId);
+                Governorate governorate = _ghostRepository.GetById(item.ClientGovernorateId);
+
+                OrderReporttWithOrderByStatusDateViewModel ordersViewModelItem = new OrderReporttWithOrderByStatusDateViewModel();
+                ordersViewModelItem.Id = item.Id;
+                ordersViewModelItem.Date = item.creationDate;
+                ordersViewModelItem.Client = item.ClientName;
+                ordersViewModelItem.PhoneNumber = item.ClientPhone1;
+                ordersViewModelItem.City = city.Name;
+                ordersViewModelItem.Governorate = governorate.Name;
+                ordersViewModelItem.ShippingPrice = item.ShippingPrice;
+
+
+                ordersViewModel.Add(ordersViewModelItem);
+            }
+            ViewData["OrderStates"] = _orderStateRepository.GetAll();
+
+            return View(ordersViewModel);
         }
 
         public IActionResult Details(int id)
@@ -71,7 +99,7 @@ namespace MVCProject.Controllers
             order.TraderId = int.Parse(nameClaim.Value);
             if (ModelState.IsValid)
             {
-                order.Price = _orderRepository.CalculateTotalPrice(order);
+                order.ShippingPrice = _orderRepository.CalculateTotalPrice(order);
                 _orderRepository.Add(order);
                 _orderRepository.Save();
                 return RedirectToAction("Index");
@@ -91,15 +119,23 @@ namespace MVCProject.Controllers
             ViewData["PaymentMethods"] = _paymentMethodRepository.GetAll();
             ViewData["Branches"] = _branchRepository.GetAll();
             ViewData["Governorates"] = _ghostRepository.GetAll();
+            
+            
 
             Order order = _orderRepository.GetById(id);
+
+            City city = _cityRepository.GetById(order.ClientCityId);
+
+            ViewData["City"] = city.Name;
             return View(order);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Order order) { 
-        
-        if (ModelState.IsValid)
+        public IActionResult Edit(Order order) {
+
+            Claim nameClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+            order.TraderId = int.Parse(nameClaim.Value);
+            if (ModelState.IsValid)
             {
                 _orderRepository.Edit(order);
                 _orderRepository.Save();
@@ -112,5 +148,64 @@ namespace MVCProject.Controllers
             ViewData["Governorates"] = _ghostRepository.GetAll();
             return View(order);
         }
+        public IActionResult Delete(int id)
+        {
+            Order order = _orderRepository.GetById(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            return View(order);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _orderRepository.Delete(id);
+            _orderRepository.Save();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult GetFilteredOrders(int orderState)
+        {
+            List<OrderReporttWithOrderByStatusDateViewModel> filteredOrdersViewModel = new List<OrderReporttWithOrderByStatusDateViewModel>();
+
+
+
+            List<Order> filteredOrders;
+
+            if (orderState == 0)
+            {
+                filteredOrders = _orderRepository.GetAll();
+            }
+            else
+            {
+                filteredOrders = _orderRepository.GetByOrderState(orderState);
+            }
+
+
+            foreach (var item in filteredOrders)
+            {
+                City city = _cityRepository.GetById(item.ClientCityId);
+                Governorate governorate = _ghostRepository.GetById(item.ClientGovernorateId);
+
+                OrderReporttWithOrderByStatusDateViewModel ordersViewModelItem = new OrderReporttWithOrderByStatusDateViewModel();
+                ordersViewModelItem.Id = item.Id;
+                ordersViewModelItem.Date = item.creationDate;
+                ordersViewModelItem.Client = item.ClientName;
+                ordersViewModelItem.PhoneNumber = item.ClientPhone1;
+                ordersViewModelItem.City = city.Name;
+                ordersViewModelItem.Governorate = governorate.Name;
+                ordersViewModelItem.ShippingPrice = item.ShippingPrice;
+
+                filteredOrdersViewModel.Add(ordersViewModelItem);
+            }
+
+
+
+            return Json(filteredOrdersViewModel);
+        }
+
     }
 }

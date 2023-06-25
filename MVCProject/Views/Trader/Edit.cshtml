@@ -10,20 +10,6 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
-            Name
-            Email
-            Password
-            Branch
-            Phone
-            Address
-            Store NAme
-            Governorate
-            city
-            special pickup
-            trader tax rejection
-            creation date
-            status
-            Role
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -44,7 +30,7 @@
             <div class="form-group">
                 <label asp-for="BranchId" class="control-label"></label>
                 <select asp-for="BranchId" asp-items="ViewBag.BranchList" class="form-control">
-                    <option value="0">--Select Branch--</option>
+                    <option value="">--Select Branch--</option>
                 </select>
                 <span asp-validation-for="BranchId" class="text-danger"></span>
             </div>
@@ -65,15 +51,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="GoverId" class="control-label"></label>
-                <select asp-for="GoverId" asp-items="ViewBag.GovernList" class="form-control">
-                    <option value="0">--Select Governorate--</option>
+                <select asp-for="GoverId" asp-items="ViewBag.GovernList" class="form-control" onchange="getCitesInGovernrate()">
+                    <option value="">--Select Governorate--</option>
                 </select>
                 <span asp-validation-for="GoverId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CityId" class="control-label"></label>
                 <select asp-for="CityId" asp-items="ViewBag.CityList" class="form-control">
-                    <option value="0">--Select City--</option>
+                    <option value="">--Select City--</option>
                 </select>
                 <span asp-validation-for="CityId" class="text-danger"></span>
             </div>
@@ -105,6 +91,14 @@
                 <span asp-validation-for="Role" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="isAvailable" /> Available
+                        <input type="hidden" asp-for="IsDeleted" id="isDeleted" />
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -115,6 +109,43 @@
     <a class="btn btn-outline-secondary" asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+
+    <script src="/lib/jquery/dist/jquery.js"></script>
+
+    <script>
+        function getCitesInGovernrate() {
+            var governrateId = document.getElementById("GoverId").value;
+            console.log(governrateId);
+
+            $.ajax({
+                url: `/Trader/getCitesByGovernrate?govId=${governrateId}`,
+                success: function (result) {
+                    document.getElementById("CityId").innerHTML = "";
+
+                    for (let i of result) {
+                        document.getElementById("CityId").innerHTML +=
+                            `<option value=${i.id}>${i.name}</option>`
+                    }
+                }
+            });
+        }
+
+        $(function () {
+            // Set initial state of checkbox
+            var isDeleted = $('#isDeleted').val().toLowerCase() === 'true';
+            $('#isAvailable').prop('checked', !isDeleted);
+
+            // On form submit, invert the checkbox value
+            $('form').on('submit', function () {
+                var isChecked = $('#isAvailable').is(':checked');
+                $('#isDeleted').val(!isChecked);
+            });
+        });
+    </script>
 }
