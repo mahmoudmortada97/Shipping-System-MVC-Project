@@ -15,12 +15,14 @@ namespace MVCProject.Repository.EmployeeRepo
 
         public List<Employee> GetAll()
         {
-            return _context.Employees.Where(e => e.IsDeleted == false).Include(e =>e.Branch).ToList();
+            return _context.Employees.Include(e => e.Branch).ToList();
+            //.Where(e => e.IsDeleted == false)
         }
 
         public Employee GetById(int id)
         {
-            return _context.Employees.FirstOrDefault(e => e.Id == id && e.IsDeleted == false)!;
+            return _context.Employees.FirstOrDefault(e => e.Id == id)!;
+            // && e.IsDeleted == false
         }
         public Employee GetById(int id, bool includeRelatedEntities = true)
         {
@@ -30,7 +32,8 @@ namespace MVCProject.Repository.EmployeeRepo
                     .Include(e => e.Branch)
                     .FirstOrDefault(e => e.Id == id)!;
             }
-            return _context.Employees.FirstOrDefault(e => e.Id == id && e.IsDeleted == false)!;
+            return _context.Employees.FirstOrDefault(e => e.Id == id)!;
+            // && e.IsDeleted == false
         }
 
         public void Create(Employee employee)
@@ -45,7 +48,7 @@ namespace MVCProject.Repository.EmployeeRepo
 
         public void Delete(int id)
         {
-            Employee employee = _context.Employees.Find(id);
+            Employee employee = _context.Employees.Find(id)!;
             _context.Employees.Remove(employee);
             _context.SaveChanges();
         }

@@ -91,6 +91,14 @@
                 <span asp-validation-for="Role" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="isAvailable" /> Available
+                        <input type="hidden" asp-for="IsDeleted" id="isDeleted" />
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -127,5 +135,17 @@
                 }
             });
         }
+
+        $(function () {
+            // Set initial state of checkbox
+            var isDeleted = $('#isDeleted').val().toLowerCase() === 'true';
+            $('#isAvailable').prop('checked', !isDeleted);
+
+            // On form submit, invert the checkbox value
+            $('form').on('submit', function () {
+                var isChecked = $('#isAvailable').is(':checked');
+                $('#isDeleted').val(!isChecked);
+            });
+        });
     </script>
 }
