@@ -5,6 +5,7 @@ namespace MVCProject.Models
 {
     public class Account
     {
+        [UniqueEmail]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
