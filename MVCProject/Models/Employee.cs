@@ -11,6 +11,7 @@ namespace MVCProject.Models
 
         [ForeignKey("Branch")]
         [Display(Name = "Branch")]
+        [Required(ErrorMessage = "Please select branch")]
         public int BranchId { get; set; }
         public virtual Branch? Branch { get; set; }
     }
