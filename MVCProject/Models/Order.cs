@@ -72,8 +72,27 @@ namespace MVCProject.Models
         public int TraderId { get; set; }
         public Trader? Trader { get; set; }
 
+        [ForeignKey("Representative")]
+        public int? RepresentativeId { get; set; }
+        public Representative? Representative { get; set; }
+
+
         public bool IsDeleted { get; set; }
 
-        public decimal Price { get; set; }
+
+        [Display(Name = "Order Price")]
+        public decimal OrderPrice { get; set; }
+
+        [Display(Name = "Order Price Recieved")]
+        public decimal OrderPriceRecieved { get; set; } = 0;
+
+        [Display(Name = "Shipping Price")]
+        public decimal ShippingPrice { get; set; }
+
+        [Display(Name = "Shipping Price Recieved ")]
+        public decimal ShippingPriceRecived { get; set; } = 0;
+
+        public decimal TotalWeight { get; set; }
+
     }
 }
