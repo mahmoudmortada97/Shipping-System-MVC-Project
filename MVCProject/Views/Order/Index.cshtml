@@ -4,11 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="display-4 text-center alert alert-danger">All Orderes</h1>
+<h1>Orders</h1>
 
 <p>
-    <a  class="btn btn-primary" asp-action="Create">Add New Order</a>
+    <a class="btn btn-outline-primary my-2" asp-action="Create">Create New</a>
 </p>
+
 <table class="table table-bordered text-ceneter table-hover">
     <thead>
         <tr>
@@ -64,7 +65,7 @@
                 @Html.DisplayFor(modelItem => item.ClientCity.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.ShippingPrice)
             </td>
             <td>
                     <a asp-action="Edit" asp-route-id="@item.Id"><i role="button" class="fa-solid fa-pen-to-square text-success"></i></a>

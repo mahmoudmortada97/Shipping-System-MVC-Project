@@ -9,6 +9,8 @@ using MVCProject.Repository.DiscountTypeRepo;
 using MVCProject.Repository.EmployeeRepo;
 using MVCProject.Repository.GovernorateRepo;
 using MVCProject.Repository.OrderRepo;
+using MVCProject.Repository.OrderReportRepo;
+using MVCProject.Repository.OrderStateRepo;
 using MVCProject.Repository.OrderTypeRepo;
 using MVCProject.Repository.PaymentMethodRepo;
 using MVCProject.Repository.ProductRepo;
@@ -41,6 +43,10 @@ namespace MVCProject
             builder.Services.AddScoped<IOrderTypeRepository, OrderTypeRepository>();
             builder.Services.AddScoped<IDeliverTypeRepository, DeliverTypeRepository>();
             builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
+            builder.Services.AddScoped<IOrderReportRepository, OrderReportRepository>();
+            builder.Services.AddScoped<IOrderStateRepository, OrderStateRepository>();
+
+
             builder.Services.AddScoped<IWeightSettingRepository, WeightSettingRepository>();
             builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(
                         builder.Configuration.GetConnectionString("CS")));

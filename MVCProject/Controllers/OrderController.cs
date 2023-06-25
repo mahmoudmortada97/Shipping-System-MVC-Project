@@ -5,6 +5,7 @@ using MVCProject.Repository.CityRepo;
 using MVCProject.Repository.DeliverTypeRepo;
 using MVCProject.Repository.GovernorateRepo;
 using MVCProject.Repository.OrderRepo;
+using MVCProject.Repository.OrderStateRepo;
 using MVCProject.Repository.OrderTypeRepo;
 using MVCProject.Repository.PaymentMethodRepo;
 using System.Security.Claims;
@@ -37,7 +38,6 @@ namespace MVCProject.Controllers
             _paymentMethodRepository = paymentMethodRepository;
             _ghostRepository = governRepository;
             _cityRepository = cityRepository;
-
             
         }
         public IActionResult Index(string word)
@@ -71,7 +71,7 @@ namespace MVCProject.Controllers
             order.TraderId = int.Parse(nameClaim.Value);
             if (ModelState.IsValid)
             {
-                order.Price = _orderRepository.CalculateTotalPrice(order);
+                order.ShippingPrice = _orderRepository.CalculateTotalPrice(order);
                 _orderRepository.Add(order);
                 _orderRepository.Save();
                 return RedirectToAction("Index");
