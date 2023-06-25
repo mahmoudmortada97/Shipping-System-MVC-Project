@@ -17,9 +17,8 @@ namespace MVCProject.Models
         [ForeignKey("Branch")]
         public int BranchId { get; set; }
         public virtual Branch? Branch { get; set; }
-
         [ForeignKey("DiscountType")]
-        public int? DiscountTypeId { get; set; } 
+        public int DiscountTypeId { get; set; } 
         public DiscountType? DiscountType { get; set; }
         public string Role { get; set; } = "Representative";
 
