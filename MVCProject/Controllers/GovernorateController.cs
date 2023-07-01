@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVCProject.Models;
 using MVCProject.Repository.CityRepo;
 using MVCProject.Repository.GovernorateRepo;
@@ -6,11 +7,12 @@ using MVCProject.ViewModel;
 
 namespace MVCProject.Controllers
 {
+    [Authorize(Roles = "Employee, Admin")]
     public class GovernorateController : Controller
     {
         IGovernRepository _governRepository;
         ICityRepository _cityRepository;
-        public GovernorateController(IGovernRepository governRepository,ICityRepository cityRepository)
+        public GovernorateController(IGovernRepository governRepository, ICityRepository cityRepository)
         {
             _governRepository = governRepository;
             _cityRepository = cityRepository;
@@ -33,7 +35,7 @@ namespace MVCProject.Controllers
         public IActionResult Details(int id)
         {
             var cites = _cityRepository.GetAllCitiesByGovId(id);
-            ViewData["GovName"]=_governRepository.GetById(id).Name;
+            ViewData["GovName"] = _governRepository.GetById(id).Name;
             return View(cites);
         }
         public IActionResult Create()
@@ -46,7 +48,7 @@ namespace MVCProject.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+
                 _governRepository.Add(governorate);
                 _governRepository.Save();
                 return RedirectToAction("Index");
@@ -76,4 +78,5 @@ namespace MVCProject.Controllers
             return Content("sucsses");
         }
     }
+
 }

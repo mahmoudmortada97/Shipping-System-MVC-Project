@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVCProject.Models;
 using MVCProject.Repository.DiscountTypeRepo;
 
 namespace MVCProject.Controllers
 {
+    [Authorize(Roles = "Employee, Admin")]
     public class DiscountTypeController : Controller
     {
         IDiscountTypeRepository _discountTypeRepository;

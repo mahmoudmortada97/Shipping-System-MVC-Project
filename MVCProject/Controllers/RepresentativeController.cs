@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVCProject.Models;
 using MVCProject.Repository.BranchRepo;
 using MVCProject.Repository.DiscountTypeRepo;
@@ -8,6 +9,7 @@ using MVCProject.ViewModel;
 
 namespace MVCProject.Controllers
 {
+    [Authorize(Roles = "Employee, Admin")]
     public class RepresentativeController : Controller
     {
         IRepresentativeRepository _representativeRepostiory;
@@ -60,17 +62,10 @@ namespace MVCProject.Controllers
         {
             if (!ModelState.IsValid)
             {
-                try
-                {
-                    repViewModel.Governorates = _governRepository.GetAll();
-                    repViewModel.Branchs = _branchRepository.GetAll();
-                    repViewModel.DiscountTypes = _discountTypeRepository.GetAll();
-                    return View(repViewModel);
-                }
-                catch
-                {
-
-                }
+                repViewModel.Governorates = _governRepository.GetAll();
+                repViewModel.Branchs = _branchRepository.GetAll();
+                repViewModel.DiscountTypes = _discountTypeRepository.GetAll();
+                return View(repViewModel);
             }
             var rep = new Representative
             {
@@ -83,6 +78,7 @@ namespace MVCProject.Controllers
                 GovernorateId = repViewModel.GovernorateId,
                 BranchId = repViewModel.BranchId,
                 DiscountTypeId = repViewModel.DiscountTypeId,
+                IsDeleted = repViewModel.IsDeleted,
             };
             _representativeRepostiory.Add(rep);
             _representativeRepostiory.Save();
@@ -122,6 +118,7 @@ namespace MVCProject.Controllers
             }
             var rep = new Representative
             {
+                Id = repViewModel.Id,
                 Name = repViewModel.Name,
                 Address = repViewModel.Address,
                 Email = repViewModel.Email,
@@ -131,8 +128,9 @@ namespace MVCProject.Controllers
                 GovernorateId = repViewModel.GovernorateId,
                 BranchId = repViewModel.BranchId,
                 DiscountTypeId = repViewModel.DiscountTypeId,
+                IsDeleted = repViewModel.IsDeleted,
             };
-            _representativeRepostiory.Add(rep);
+            _representativeRepostiory.Edit(rep);
             _representativeRepostiory.Save();
             return RedirectToAction(nameof(Index));
         }
@@ -140,10 +138,11 @@ namespace MVCProject.Controllers
         {
             _representativeRepostiory.Delete(id);
             _representativeRepostiory.Save();
-            return View();
+            return Content("sucsses");
         }
 
 
 
     }
+
 }

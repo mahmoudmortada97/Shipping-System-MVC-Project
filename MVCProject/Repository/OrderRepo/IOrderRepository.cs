@@ -13,6 +13,8 @@ namespace MVCProject.Repository.OrderRepo
 
         List<Order> GetByOrderState(int stateId);
 
+        List<Order> GetByRepresentativeId(int represntativeId);
+
         decimal CalculateTotalPrice(Order order);
 
         decimal CalculateCityPrice(int cityId);

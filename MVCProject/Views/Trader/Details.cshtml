@@ -15,10 +15,10 @@
                 <h4 class="card-title col-sm-12">@Model?.Name</h4>
                 <p class="card-text col-sm-6">ID : </p> <p class="col-sm-6">@Model?.Id</p>
                 <p class="card-text col-sm-6">Email : </p> <p class="col-sm-6">@Model?.Email</p>
-                <p class="card-text col-sm-6">Password : </p> <p class="col-sm-6">@Model?.Password</p>
                 <p class="card-text col-sm-6">Branch : </p> <p class="col-sm-6">@Model?.Branch?.Name</p>
                 <p class="card-text col-sm-6">Phone : </p> <p class="col-sm-6">@Model?.Phone</p>
                 <p class="card-text col-sm-6">Address : </p> <p class="col-sm-6">@Model?.Address</p>
+                <p class="card-text col-sm-6">Role : </p> <p class="col-sm-6">Trader</p>
                 <p class="card-text col-sm-6">Store Name : </p> <p class="col-sm-6">@Model?.StoreName</p>
                 <p class="card-text col-sm-6">Governorate : </p> <p class="col-sm-6">@Model?.Governorate?.Name</p>
                 <p class="card-text col-sm-6">City : </p> <p class="col-sm-6">@Model?.City?.Name</p>
@@ -26,7 +26,6 @@
                 <p class="card-text col-sm-6">Trader Tax For Rejected Orders : </p> <p class="col-sm-6">@Model?.TraderTaxForRejectedOrders</p>
                 <p class="card-text col-sm-6">Creation Date : </p> <p class="col-sm-6">@Model?.creationDate</p>
                 <p class="card-text col-sm-6">Status : </p> <p class="col-sm-6">@(Model.IsDeleted ? "Unavailable" : "Available")</p>
-                <p class="card-text col-sm-6">Role : </p> <p class="col-sm-6">Trader</p>
             </div>
         </div>
     </div>

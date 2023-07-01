@@ -12,5 +12,6 @@ namespace MVCProject.Repository.TraderRepo
         void Edit(Trader trader);
         void Delete(int id);
         void Save();
+        List<Trader> GetAllTradersByBranchId(int id);
     }
 }

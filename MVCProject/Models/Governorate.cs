@@ -14,5 +14,7 @@ namespace MVCProject.Models
         public List<Trader> Traders { get; set; }=new List<Trader>();   
 
         public List<City> Cities { get; set; }=new List<City>();
+
+        public bool IsDeleted { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MVCProject.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MVCProject.Models;
 using MVCProject.Repository.RepresentiveRepo;
 
 namespace MVCProject.Repository.RepresentativeRepo
@@ -22,10 +23,10 @@ namespace MVCProject.Repository.RepresentativeRepo
         {
             _context.Representatives.Entry(rep).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }
-        
+
         public List<Representative> GetAll()
         {
-            return _context.Representatives.ToList();
+            return _context.Representatives.Include(e => e.Branch).ToList();
         }
 
         public Representative GetById(int id)

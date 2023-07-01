@@ -1,4 +1,4 @@
-﻿@model MVCProject.Models.Branch
+﻿@model Branch
 
 @{
     ViewData["Title"] = "Edit";
@@ -10,18 +10,17 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+            @Html.AntiForgeryToken()
+            <input class="form-control" asp-for="Id" hidden="" />
+            <div>
+                <label asp-for="Name"></label>
+                <input class="form-control" asp-for="Name" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input type="checkbox" id="myCheckbox" name="myCheckbox" value="true" />
-                    @Html.DisplayNameFor(model => model.IsDeleted)
-                </label>
+            <div>
+                <label>IsNotAvilable</label>
+                <input type="checkbox" asp-for="IsDeleted" />
+
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -35,5 +34,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

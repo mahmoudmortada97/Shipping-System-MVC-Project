@@ -1,36 +1,45 @@
-﻿@model IEnumerable<MVCProject.Models.Branch>
+﻿@model List<Branch>
 
 @{
     ViewData["Title"] = "Index";
 }
-
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary m-3">Branch</h6>
-        <a href="/branch/Add" class="btn btn-outline-success"> Create New Branch</a>
-
-    </div>
+<a asp-action="Add" class="btn btn-primary mb-3">Add New Branch</a>
+<div class="card shadow mb-4 text-center">
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>                    
-                        <th>Edit</th>
-                        <th>Details</th>
-                        <th>Delete</th>
+                        <th>Name </th>
+                        <th>CreationDate </th>
+                        <th>State</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>@item.Id</td>
+                        <tr id="row_@item.Id">
+                            <td>@item.Id </td>
                             <td>@item.Name</td>
-                            <td><a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a></td>
-                            <td><a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id">Details</a></td>
-                            <td><a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+                            <td>@item.CreationDate</td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" role="switch" id="switch-@item.Id" @(item.IsDeleted ? "unchecked" : "checked")>
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-controller="Branch" asp-route-id="@item.Id" class="btn btn-outline-primary">Edit</a>
+
+                            </td>
+                            <td>
+                                <input type="submit" class="btn btn-danger" value="Delete" onclick="Delete(@item.Id)" />
+                            </td>
+                            <td>
+                                <a asp-action="Details" asp-controller="Branch" asp-route-id="@item.Id" class="btn btn-outline-success">Details</a>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -38,3 +47,29 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts{
+    <script>
+        function Delete(id) {
+            if (confirm(`Are you sure you want delete this item `)) {
+
+                $.ajax({
+                    type: "POST",
+                    url: `@Url.Action("Delete")`,
+                    data: { id: id },
+                    dataType: "text",
+                    success: function (response) {
+                        if (response.trim() == "sucsses") {
+                            $("#row_" + id).remove()
+                        }
+                    },
+                    error: function () {
+                        alert("Error while deleting data");
+                    }
+                });
+            }
+
+        }
+    </script>
+}

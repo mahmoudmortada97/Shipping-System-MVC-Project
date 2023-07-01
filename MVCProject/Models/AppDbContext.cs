@@ -48,8 +48,10 @@ namespace MVCProject.Models
 
 
             modelBuilder.Entity<Branch>().Property(m => m.IsDeleted).HasDefaultValue(false);
+            modelBuilder.Entity<Governorate>().Property(m => m.IsDeleted).HasDefaultValue(false);
             modelBuilder.Entity<Employee>().Property(m => m.IsDeleted).HasDefaultValue(false);
             modelBuilder.Entity<Order>().Property(m => m.IsDeleted).HasDefaultValue(false);
+            modelBuilder.Entity<Order>().Property(m => m.RepresentativeId).HasDefaultValue(3);
             modelBuilder.Entity<Product>().Property(m => m.IsDeleted).HasDefaultValue(false);
             modelBuilder.Entity<Representative>().Property(m => m.IsDeleted).HasDefaultValue(false);
             modelBuilder.Entity<Trader>().Property(m => m.IsDeleted).HasDefaultValue(false);

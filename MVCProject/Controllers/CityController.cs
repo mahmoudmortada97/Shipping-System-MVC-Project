@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVCProject.Models;
 using MVCProject.Repository.CityRepo;
 using MVCProject.Repository.GovernorateRepo;
@@ -6,21 +7,22 @@ using MVCProject.ViewModel;
 
 namespace MVCProject.Controllers
 {
+    [Authorize(Roles = "Employee, Admin")]
     public class CityController : Controller
     {
         ICityRepository _cityRepository;
         IGovernRepository _governRepository;
-        public CityController(ICityRepository cityRepository,IGovernRepository governRepository)
+        public CityController(ICityRepository cityRepository, IGovernRepository governRepository)
         {
             _cityRepository = cityRepository;
             _governRepository = governRepository;
-            
+
         }
         public IActionResult Index(string word)
         {
-            List<City> cities;          
-            cities= _cityRepository.GetAll();     
-           
+            List<City> cities;
+            cities = _cityRepository.GetAll();
+
             return View(cities);
         }
         public IActionResult Details(int id)
@@ -31,17 +33,17 @@ namespace MVCProject.Controllers
         public IActionResult Create(int id)
         {
             ViewData["GovList"] = _governRepository.GetAll();
-            ViewData["gov_id"] = _governRepository.GetById(id).Id;
+            //ViewData["gov_id"] = _governRepository.GetById(id).Id;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(City city,int id)
+        public IActionResult Create(City city, int id)
         {
-            var gov = _governRepository.GetById(id).Id;
+            //var gov = _governRepository.GetById(id).Id;
             if (ModelState.IsValid)
             {
-                city.Id = default;
+                //city.Id = default;
                 _cityRepository.Add(city);
                 _cityRepository.Save();
                 return RedirectToAction("Index");
@@ -74,4 +76,5 @@ namespace MVCProject.Controllers
             return Content("sucsses");
         }
     }
+
 }

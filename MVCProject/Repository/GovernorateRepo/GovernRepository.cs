@@ -19,7 +19,7 @@ namespace MVCProject.Repository.GovernorateRepo
         public void Delete(int id)
         {
             Governorate governorate = GetById(id);
-            _context.governorates.Remove(governorate);
+            governorate.IsDeleted = true;
 
         }
 

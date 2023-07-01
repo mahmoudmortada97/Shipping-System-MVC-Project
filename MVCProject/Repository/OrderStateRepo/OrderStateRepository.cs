@@ -15,5 +15,9 @@ namespace MVCProject.Repository.OrderStateRepo
         {
             return _context.OrderStates.ToList();
         }
+        public OrderState GetById(int id)
+        {
+            return _context.OrderStates.FirstOrDefault(e => e.Id == id )!;
+        }
     }
 }

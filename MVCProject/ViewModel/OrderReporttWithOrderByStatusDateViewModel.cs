@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVCProject.ViewModel
 {
     public class OrderReporttWithOrderByStatusDateViewModel
     {
+        [NotMapped]
         public int Id { get; set; }
 
         [Display(Name = "Serial Number")]

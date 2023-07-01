@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVCProject.Models;
 using MVCProject.Repository.OrderRepo;
 using MVCProject.Repository.OrderReportRepo;
@@ -8,6 +9,7 @@ using MVCProject.ViewModel;
 
 namespace MVCProject.Controllers
 {
+    [Authorize(Roles = "Employee, Admin")]
     public class OrderReportController : Controller
     {
         IOrderReportRepository _orderReportRepository;
@@ -18,14 +20,12 @@ namespace MVCProject.Controllers
         {
             _orderReportRepository = orderReportRepository;
             _orderStateRepository = orderStateRepository;
-
         }
         public IActionResult Index()
         {
             List<OrderReporttWithOrderByStatusDateViewModel> ordersViewModel = new List<OrderReporttWithOrderByStatusDateViewModel>();
 
             List<Order> orders = _orderReportRepository.GetOrders();
-
 
             foreach (var item in orders)
             {

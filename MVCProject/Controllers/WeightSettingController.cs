@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVCProject.Models;
 using MVCProject.Repository.WeightSettingRepo;
 
 namespace MVCProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class WeightSettingController : Controller
     {
         private readonly IWeightSettingRepository _weightSettingRepository;

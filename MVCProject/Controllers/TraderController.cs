@@ -9,13 +9,14 @@ using MVCProject.Repository.TraderRepo;
 using MVCProject.Repository.OrderRepo;
 using System.Security.Claims;
 using MVCProject.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MVCProject.Controllers
 {
-
+    [Authorize(Roles = "Employee, Admin ,Trader")]
     public class TraderController : Controller
     {
-        ITraderRepository _traderRepository;
+        ITraderRepository _traderRepository;    
         IGovernRepository _governRepository;
         ICityRepository _cityRepository;
         IBranchRepository _branchRepository;

@@ -1,28 +1,23 @@
-﻿@model MVCProject.Models.Branch
+﻿@model List<Trader>
 
 @{
     ViewData["Title"] = "Details";
 }
+<h1>@ViewBag.BranchName</h1>
 
-<div class="container">
-
-    <div class="row justify-content-center">
-
-        <div class="card col-md-8" style="width:300px">
-            <div class="card-body row">
-                <h4 class="card-title col-sm-12">@Model?.Name</h4>
-                <p class="card-text col-sm-6">ID : </p> <p class="col-sm-6">@Model?.Id</p>
-                <p class="card-text col-sm-6">Creation Date : </p> <p class="col-sm-6">@Model?.CreationDate</p>
-                <p class="card-text col-sm-6">Is Deleted : </p> <p class="col-sm-6">@Model?.IsDeleted</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="m-md-5">
-        <a class="btn btn-outline-success me-5" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-        <a class="btn btn-outline-secondary ms-3" asp-action="Index">Back to List</a>
-    </div>
-
-</div>
-
-
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Trader Name</th>
+        <th>Store Name</th>
+        <th>Special Pickup Cost</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name </td>
+            <td>@item.StoreName</td>
+            <td>@item.SpecialPickupCost</td>
+        </tr>
+    }
+</table>
+<a asp-action="Index" class="btn btn-primary"> Back </a>

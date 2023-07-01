@@ -14,7 +14,7 @@ namespace MVCProject.Repository.OrderRepo
 
         public List<Order> GetAll()
         {
-            return _context.Orders.Where(e => e.IsDeleted == false)/*.Include(o=>o.ClientGovernorate).Include(o=>o.ClientCity)*/.ToList();
+            return _context.Orders.Where(e => e.IsDeleted == false).Include(o=>o.Representative)/*.Include(o=>o.ClientGovernorate).Include(o=>o.ClientCity)*/.ToList();
         }
 
 
@@ -44,23 +44,7 @@ namespace MVCProject.Repository.OrderRepo
 
         public decimal CalculateTotalPrice(Order order)
         {
-            //Order order = _context..Include(o => o.Products)
-            //                                .Include(o => o.ClientCity)
-            //                                .Include(o => o.OrderType)
-            //                                .Include(o=>o.Trader)
-            //                                    .ThenInclude(t=>t.SpecialPriceForCities)
-            //                                    .FirstOrDefault()!;
-
-
-            //Special Price for Trader within Specific City 
-            //foreach (var item in order.Trader.SpecialPriceForCities)
-            //{
-            //    if(item.City == order.ClientCity)
-            //        {
-            //            price += item.Shippingprice;
-            //        break;
-            //        }   
-            //}
+           
             decimal Price = 0;
 
             var CityId = order.ClientCityId;
@@ -128,6 +112,13 @@ namespace MVCProject.Repository.OrderRepo
         public List<Order> GetByOrderState(int stateId)
         {
             return _context.Orders.Where(o=>o.OrderStateId == stateId && o.IsDeleted == false)/*.Include(o=>o.ClientCity).Include(o=>o.ClientGovernorate)*/.ToList();
+        }
+
+    
+
+        public List<Order> GetByRepresentativeId(int represntativeId)
+        {
+            return _context.Orders.Include(o=>o.ClientCity).Include(o=>o.ClientGovernorate).Include(o=>o.OrderState).Where(o => o.RepresentativeId == represntativeId && o.OrderStateId ==3).ToList();
         }
     }
 }

@@ -12,6 +12,8 @@ namespace MVCProject.Repository.TraderRepo
             _context = context;
         }
 
+
+
         public List<Trader> GetAll()
         {
             return _context.Traders.Where(t => t.IsDeleted == false)
@@ -53,6 +55,11 @@ namespace MVCProject.Repository.TraderRepo
         public void Save()
         {
             _context.SaveChanges();
+        }
+
+        public List<Trader> GetAllTradersByBranchId(int id)
+        {
+            return _context.Traders.Where(c => c.BranchId == id).ToList();
         }
     }
 }

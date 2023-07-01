@@ -3,8 +3,17 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    .medium-td{
+        min-width:10vw;
+    }
 
+    .large-td {
+        min-width: 15vw;
+    }
+</style>
 <h1>Traders</h1>
+
 
 <p>
     <a class="btn btn-outline-primary my-2" asp-action="Create">Create New Trader</a>
@@ -12,7 +21,7 @@
 
 <div class="card shadow mb-4">
     <div class="card-body">
-        <div class="table-responsive">
+        <div class="table-responsive text-center">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
@@ -45,17 +54,17 @@
                             <td>@item?.Branch?.Name</td>
                             <td>@item?.Phone</td>
                             <td>@item?.Address</td>
-                            <td>@item?.StoreName</td>
+                            <td class="large-td">@item?.StoreName</td>
                             <td>@item?.Governorate?.Name</td>
                             <td>@item?.City?.Name</td>
-                            <td>@item?.SpecialPickupCost</td>
-                            <td>@item?.TraderTaxForRejectedOrders</td>
+                            <td class="large-td">@item?.SpecialPickupCost</td>
+                            <td class="large-td">@item?.TraderTaxForRejectedOrders</td>
                             <td>
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" role="switch" id="switch-@item.Id" @(item.IsDeleted ? "" : "checked")>
                                 </div>
                             </td>
-                            <td>@item?.creationDate</td>
+                            <td class="medium-td">@item?.creationDate</td>
                             <td>@item?.Role</td>
                             <td><a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@item?.Id">Details</a></td>
                             <td><a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item?.Id">Edit</a></td>

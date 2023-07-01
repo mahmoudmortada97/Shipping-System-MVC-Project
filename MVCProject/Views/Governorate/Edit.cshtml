@@ -12,6 +12,10 @@
         <input class="form-control" asp-for="Name" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-    <input type="submit" value="Edit" class="btn btn-primary my-3" />
-</form>
+    <div>
+        <input class="my-3" type="checkbox" asp-for="IsDeleted" />
+        <label>Is Not Avilable</label>
 
+    </div>
+    <input type="submit" value="Save" class="btn btn-primary"   />
+</form>

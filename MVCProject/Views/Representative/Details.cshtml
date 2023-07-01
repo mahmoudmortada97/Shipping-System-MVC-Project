@@ -4,88 +4,33 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="my-4">Representative Details</h1>
 
-<div>
-    <h4>Representative</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            <label>Percentage Of Order</label>
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CompanyPercentageOfOrder)
-        </dd>
-        <dt class = "col-sm-2">
-            <label>Governorate</label>
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Governorate.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            <label>Branch</label>
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Branch.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            <label>Discount Type</label>
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DiscountType.Percentage)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Role)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Role)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-        
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.creationDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.creationDate)
-        </dd>
-        <dt class = "col-sm-2">
-            <label>State</label>
-        </dt>
-        <dd class = "col-sm-10">
-            @(Model.IsDeleted ? "Not Avalible" : "Avalible")
-        </dd>
-    </dl>
+<div class="container">
+
+    <div class="row justify-content-center">
+
+        <div class="card col-md-8" style="width:300px">
+            <div class="card-body row">
+                <h4 class="card-title col-sm-12">@Model?.Name</h4>
+                <p class="card-text col-sm-6">ID : </p> <p class="col-sm-6">@Model?.Id</p>
+                <p class="card-text col-sm-6">Email : </p> <p class="col-sm-6">@Model?.Email</p>
+                <p class="card-text col-sm-6">Phone : </p> <p class="col-sm-6">@Model?.Phone</p>
+                <p class="card-text col-sm-6">Branch : </p> <p class="col-sm-6">@Model?.Branch?.Name</p>
+                <p class="card-text col-sm-6">Role : </p> <p class="col-sm-6">@Model?.Role</p>
+                <p class="card-text col-sm-6">Address : </p> <p class="col-sm-6">@Model?.Address</p>
+                <p class="card-text col-sm-6">Creation Date </p> <p class="col-sm-6">@Model?.creationDate</p>
+                <p class="card-text col-sm-6">Status : </p> <p class="col-sm-6">@(Model.IsDeleted ? "Unavailable" : "Available")</p>
+            </div>
+        </div>
+
+        <div class="col-md-6 text-center my-3">
+            <a class="btn btn-outline-success me-5" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+            <a class="btn btn-outline-secondary ms-5" asp-action="Index">Back to List</a>
+        </div>
+    </div>
+
 </div>
-<div>
-@*    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-*@    <a asp-action="Index">Back to List</a>
-</div>
+
+
+

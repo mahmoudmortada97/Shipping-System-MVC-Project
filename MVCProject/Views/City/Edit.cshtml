@@ -9,7 +9,7 @@
 <form method="post" asp-action="Edit">
     @Html.AntiForgeryToken()
     <div>
-    <input class="form-control" asp-for="Id" hidden="" />
+        <input class="form-control" asp-for="Id" hidden="" />
         <label asp-for="Name"></label>
         <input class="form-control" asp-for="Name" />
         <span asp-validation-for="Name" class="text-danger"></span>
@@ -22,10 +22,10 @@
     <div>
         <label asp-for="GoverId">Governorate</label>
 
-        <select class="form-control" asp-for="GoverId" asp-items="govItem">
-            <option disabled value="0">----- Select Governorate-------</option>
+        <select class="form-control mb-3" asp-for="GoverId" asp-items="govItem">
+            <option value="0">----- Select Governorate-------</option>
 
         </select>
     </div>
-    <input type="submit" value="Update" class="btn btn-primary my-4" />
+    <input type="submit" value="Save" class="btn btn-primary"   />
 </form>

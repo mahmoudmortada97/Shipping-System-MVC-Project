@@ -3,31 +3,48 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Cities</h1>
+<a asp-action="Create" class="btn btn-primary mb-3">Add New City</a>
 
-<table class="table table-bordered table-hover">
-    <tr>
-        <th>ID</th>
-        <th>Name </th>
-        <th>Shipping Cost</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr id="row_@item.Id">
-            <td>@item.Id </td>
-            <td>@item.Name</td>
-            <td>@item.ShippingCost</td>
-            <td><a href="/City/Edit/@item.Id">Edit</a></td>
-            <td>
-                <input type="submit" class="btn btn-danger mb-3" value="Delete" onclick="Delete(@item.Id)" />
-            </td>
-           
-        </tr>
-    }
-</table>
+<div class="card shadow mb-4 text-center">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name </th>
+                        <th>Shipping Cost</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.Id">
+                            <td>@item.Id </td>
+                            <td>@item.Name</td>
+                            <td>@item.ShippingCost</td>
+                            <td>
+                                <a asp-action="Edit" asp-controller="City" asp-route-id="@item.Id" class="btn btn-outline-primary">Edit</a>
+                            </td>
+                            <td>
+                                <input type="submit" class="btn btn-outline-danger mb-3" value="Delete" onclick="Delete(@item.Id)" />
+                            </td>
+
+                        </tr>
+                    }
+                <tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
 @section Scripts
     {
-    <script src="~/lib/jquery/dist/jquery.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
     <script>
         function Delete(id) {
             if (confirm(`Are you sure you want delete this item `)) {
@@ -47,7 +64,7 @@
                     }
                 });
             }
-           
+
         }
     </script>
 }

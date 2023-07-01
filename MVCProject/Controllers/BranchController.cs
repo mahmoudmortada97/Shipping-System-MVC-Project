@@ -1,16 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVCProject.Models;
 using MVCProject.Repository.BranchRepo;
+using MVCProject.Repository.TraderRepo;
 
 namespace MVCProject.Controllers
 {
+    [Authorize(Roles = "Employee, Admin")]
     public class BranchController : Controller
     {
         IBranchRepository _branchRepository;
+        ITraderRepository _traderRepository;
 
-        public BranchController(IBranchRepository branchRepository)
+        public BranchController(IBranchRepository branchRepository, ITraderRepository traderRepository)
         {
             _branchRepository = branchRepository;
+            _traderRepository = traderRepository;
         }
 
         public IActionResult Index(string word)
@@ -23,7 +28,7 @@ namespace MVCProject.Controllers
             else
             {
                 branches = _branchRepository.GetAll().Where(
-                                e => e.Name.ToLower().Contains(word.ToLower())).ToList(); 
+                                e => e.Name.ToLower().Contains(word.ToLower())).ToList();
 
             }
             return View(branches);
@@ -32,9 +37,10 @@ namespace MVCProject.Controllers
 
         public IActionResult Details(int id)
         {
-            Branch branch= _branchRepository.GetById(id);
+            var traders = _traderRepository.GetAllTradersByBranchId(id);
+            ViewData["BranchName"] = _branchRepository.GetById(id).Name;
 
-            return View(branch);
+            return View(traders);
         }
 
         public IActionResult Add()
@@ -55,13 +61,14 @@ namespace MVCProject.Controllers
             return View(branch);
         }
 
-        public IActionResult Edit(int id )
+        public IActionResult Edit(int id)
         {
-            Branch branch=_branchRepository.GetById(id);
+            Branch branch = _branchRepository.GetById(id);
             return View(branch);
         }
         [HttpPost]
-        public IActionResult Edit(Branch branch) {
+        public IActionResult Edit(Branch branch)
+        {
 
             if (ModelState.IsValid)
             {
@@ -77,7 +84,7 @@ namespace MVCProject.Controllers
         {
             _branchRepository.Delete(id);
             _branchRepository.Save();
-            return RedirectToAction("Index");
+            return Content("sucsses");
         }
     }
 }

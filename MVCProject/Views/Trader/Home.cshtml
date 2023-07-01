@@ -10,13 +10,16 @@
          /* Adjust the width as needed */
     }
 </style>
+@{
+    var traderNameClaim = User.Claims.FirstOrDefault(c => c.Type.ToLower().Contains("name"))?.Value;
 
+}
 
-<h1>Home</h1>
+<h1 class="alert alert-primary text-center text-warning">Hello @traderNameClaim</h1>
 
 <div class="container">
-    <div class="row gap-3">
-        <div class="col-md-4">
+    <div class="row mt-3">
+        <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body text-center">
                      <h2>New</h2>
@@ -27,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body text-center">
                     <h2>pending</h2>
@@ -38,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body text-center">
                     <h2>order has delivered</h2>
@@ -49,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body text-center">
                     <h2>delivered to REP. </h2>
@@ -60,7 +63,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body text-center">
                     <h2>Cann't reach</h2>
@@ -71,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body text-center">
                     <h2>postponed</h2>
@@ -82,7 +85,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body text-center">
                     <h2>Partially delivered</h2>
@@ -93,7 +96,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body text-center">
                     <h2>Canceled by Client</h2>
@@ -104,7 +107,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body text-center">
                     <h3>Refused & payment</h3>
@@ -115,7 +118,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body text-center">
                     <h4>Refused & part payment</h4>
@@ -126,7 +129,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body text-center">
                     <h3>Rejected & not paid</h3>
@@ -137,5 +140,10 @@
                 </div>
             </div>
         </div>
+
+
+
     </div>
+    <a class="d-block mx-auto btn btn-outline-danger my-5 p-4" asp-action="Index" asp-controller="Order">Go To Orders Table</a>
+
 </div>
